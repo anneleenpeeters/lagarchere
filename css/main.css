@@ -1,0 +1,287 @@
+/* --------------------------------------------------
+    FONTS
+----------------------------------------------------- */
+@import 'https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;600&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Hind:wght@300;600&display=swap';
+
+/* --------------------------------------------------
+    GENERAL
+----------------------------------------------------- */
+body {
+    box-sizing: border-box;
+    font-family: 'Hind', sans-serif;
+    color: #1F1F1F;
+    background-color: #faf6f2;
+}
+
+/* --------------------------------------------------
+    STYLINGS
+----------------------------------------------------- */
+.heading-style-1 {
+    font-family: 'Abhaya Libre', serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 3rem;
+    color: #1F1F1F;
+    letter-spacing: 2px;
+}
+
+.heading-style-2 {
+    font-family: 'Abhaya Libre', serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 2rem;
+    color: #1F1F1F;
+    letter-spacing: 1px;
+}
+
+.heading-style-3 {
+    font-family: 'Abhaya Libre', serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: #1F1F1F;
+}
+
+.para {
+    font-family: 'Hind', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.p-chic {
+    font-family: 'Abhaya Libre', serif;
+    font-size: 1rem;
+}
+
+.button-style-1 {
+    border-radius: 50px;
+    font-family: 'Hind', sans-serif;
+    color: #1F1F1F;
+    font-size: 1rem;
+    padding: 6px 35px 3px 35px;
+    border: 1px solid #1F1F1F;
+    background-color: transparent;
+}
+
+.button-style-1:hover {
+    background-color: #EAE3D2;
+    border: 1px solid #EAE3D2;
+    transition: all .5s;
+}
+
+/* --------------------------------------------------
+    NAVIGATIE
+----------------------------------------------------- */
+.nav {
+    width: 100%;
+    z-index: 3;
+    background-color: #EAE3D2;
+  }
+  
+  .nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    text-align: center;
+  }
+  
+  .nav li a, 
+  .nav .nav-login li a {
+    display: block;
+    text-decoration: none;
+    font-family: 'Abhaya Libre', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+
+  .nav .menu li {
+      padding: 20px 0;
+  }
+  
+  .nav .nav-logo {
+    display: block;
+    float: left;
+    font-size: 2em;
+    padding: 10px 20px;
+    text-decoration: none;
+  }
+
+  .nav .nav-logo img {
+      width: 60px;
+  }
+  
+/* menu */
+.nav .menu {
+    clear: both;
+    max-height: 0;
+    transition: max-height .2s ease-out;
+}
+
+  
+/* menu icon */
+.nav .menu-icon {
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    padding: 28px 20px;
+    position: relative;
+    user-select: none;
+}
+  
+.nav .menu-icon .navicon {
+    background: #1F1F1F;
+    display: block;
+    height: 2px;
+    position: relative;
+    transition: background .2s ease-out;
+    width: 18px;
+}
+  
+  .nav .menu-icon .navicon:before,
+  .nav .menu-icon .navicon:after {
+    background: #1F1F1F;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+  }
+  
+  .nav .menu-icon .navicon:before {
+    top: 5px;
+  }
+  
+  .nav .menu-icon .navicon:after {
+    top: -5px;
+  }
+  
+  /* menu btn */
+  
+  .nav .menu-btn {
+    display: none;
+  }
+  
+  .nav .menu-btn:checked ~ .menu {
+    max-height: 240px;
+  }
+  
+  .nav .menu-btn:checked ~ .menu-icon .navicon {
+    background: transparent;
+  }
+  
+  .nav .menu-btn:checked ~ .menu-icon .navicon:before {
+    transform: rotate(-45deg);
+  }
+  
+  .nav .menu-btn:checked ~ .menu-icon .navicon:after {
+    transform: rotate(45deg);
+  }
+  
+  .nav .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+  .nav .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+    top: 0;
+  }
+
+  .login-icon{
+      display: none;
+  }
+  
+  /* 48em = 768px */
+  
+  @media (min-width: 60em) {
+      .nav {
+          display: flex;
+          justify-content: space-between;
+          background-color: transparent;
+      }
+    .nav li {
+      float: left;
+    }
+
+    .nav .menu {
+      clear: none;
+      float: right;
+      max-height: none;
+    }
+    .nav .menu-icon {
+      display: none;
+    }
+
+    .nav .nav-logo img {
+        margin: 20px 0 0 0;
+    }
+
+    .login-icon{
+        display: inherit;
+        font-size: 1.4rem;
+        transition: all 2ms ease-in;
+        margin: 15px 20px;
+    }
+
+    .login-icon:hover{
+        opacity: 0.5;
+    }
+
+    .login-word {
+        display: none;
+    }
+
+    .nav-midden {
+        margin-top: 15px !important;
+    }
+
+    .nav-midden li {
+        margin: 20px;
+        padding: 0 !important;
+    }
+
+    .nav-midden li a {
+        padding: 7px 15px;
+    }
+    
+    .nav-midden li:last-child a{
+        border: 1px solid #1F1F1F;
+        border-radius: 50px;
+        transition: all .5s;
+    }
+
+    .nav-midden li:last-child a:hover {
+        background-color: #1F1F1F;
+        color: #EAE3D2;
+    }
+
+    /* stroke */
+
+  nav ul.nav-midden li:not(:last-child)  a,
+  nav ul.nav-midden li:not(:last-child) a:after,
+  nav ul.nav-midden li:not(:last-child) a:before {
+    transition: all .5s;
+  }
+ 
+nav.stroke ul.nav-midden li:not(:last-child) a  {
+  position: relative;
+}
+nav.stroke ul.nav-midden li:not(:last-child) a:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: #1F1F1F;
+  height: 1px;
+}
+nav.stroke ul.nav-midden li:not(:last-child) a:hover:after {
+  width: 100%;
+}
+  }
+  
+
+
+
+
