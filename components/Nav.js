@@ -9,7 +9,7 @@ const Nav = () => (
             <Link href="/"><a className="nav-logo"><img src={logoImage} alt="La Garchère"/></a></Link>
         </div>
         <input className="menu-btn" type="checkbox" id="menu-btn" />
-        <label className="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+        <label className="menu-icon" htmlFor="menu-btn"><span className="navicon"></span></label>
         <ul className="menu nav-midden">
             <li><Link href="/kamers"><a>Kamers</a></Link></li>
             <li><Link href="/activiteiten"><a>Activiteiten</a></Link></li>

@@ -11,7 +11,7 @@ body {
     box-sizing: border-box;
     font-family: 'Hind', sans-serif;
     color: #1F1F1F;
-    background-color: #faf6f2;
+    background-color: #fffefa;
 }
 
 /* --------------------------------------------------
@@ -24,6 +24,7 @@ body {
     font-size: 3rem;
     color: #1F1F1F;
     letter-spacing: 2px;
+    line-height: 1;
 }
 
 .heading-style-2 {
@@ -84,6 +85,15 @@ body {
   background-color: transparent;
   transition: all .5s;
   color: #1F1F1F;
+}
+
+.inputtype-style-one {
+  background-color: #EAE3D2;
+  padding: 10px 20px ;
+  border-radius: 50px;
+  border: none;
+  width: 80%;
+  font-family: 'Hind', sans-serif;
 }
 
 /* --------------------------------------------------
@@ -273,7 +283,7 @@ footer {
 
 .footer-copyright {
   font-size: 0.7rem;
-  margin: 20px 0 10px 0;
+  margin: 20px 10px 10px 0;
 }
 
 
