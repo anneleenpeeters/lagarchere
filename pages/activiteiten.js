@@ -5,19 +5,15 @@ import logoTitleImage from '../images/logo_title.png'
 import {useState, useEffect, useSWR} from "react"
 
 const Activiteiten = () => {
-    // const {data} = useSWR('https://wdev.be/wdev_anneleen/eindwerk/api/activiteits', (url) => axios(url).then(r => r.data));
-
     const [data, setData] = useState([]);
     useEffect(() => {
         async function loadData(){
             const response = await axios("https://wdev.be/wdev_anneleen/eindwerk/api/activiteits");
             setData(response.data['hydra:member']);
-            console.log(response.data['hydra:member']);
         }
         loadData();
     },[]);
 
-    //console.log(data.map(a => <p>{a.titel}</p>))
     return (
         <div>
             <Head>
@@ -25,7 +21,6 @@ const Activiteiten = () => {
                 <link rel="icon" href={logoTitleImage} type="image/icon type"/>
             </Head>
         <Layout>
-        
             <div className="activiteit-container">
             {data.map(a => ( 
                 <section key={a.id}>
@@ -113,25 +108,4 @@ const Activiteiten = () => {
     )
   }
   
-  export default Activiteiten
-
-
-
-  
-
-
-    // const [error, setError] = useState(false);
-    
-        // axios
-        //   .get("https://wdev.be/wdev_anneleen/eindwerk/api/activiteits")
-        //   .then(response => {
-        //     //setData(response.data['hydra:member']);
-        //     console.log(response.data['hydra:member'][0].titel);
-        //   })
-        //   .catch(error => console.log(error));
-
-
-
-
-     
-          
+  export default Activiteiten          
