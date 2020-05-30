@@ -5,6 +5,13 @@ import mainLogoImage from '../images/main_logo.png'
 import kamerImage from '../images/kamer_mainimg.jpg'
 import logoTitleImage from '../images/logo_title.png'
 import Link from 'next/link'
+import {Form, Formik, Field, ErrorMessage, formikHelpers} from 'formik'
+import {object, string} from 'yup';
+import axios from 'axios'
+
+const initialValues = {
+  email: ''
+}
 
 export default function Home() {
   return (
@@ -32,10 +39,33 @@ export default function Home() {
         <div className="container-subscribe">
           <h2 className="heading-style-1">Schrijf je in voor onze nieuwsbrief</h2>
           <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-          <form>
-            <input className="inputtype-style-one" type="text" placeholder="email" />
-            <button type="submit" className="button-style-1">Inschrijven</button>
-          </form>
+          <Formik 
+          validationSchema={
+            object({
+              email: string().required()
+            })
+          }
+          initialValues={initialValues} 
+          onSubmit={(values, formikHelpers)=> {
+            axios.post("https://wdev.be/wdev_anneleen/eindwerk/api/subscribes", values)
+            .then(function (response) {
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+            
+          }}>
+            {({values, errors, isSubmitting}) => (
+              <Form>
+                <Field name="email" type="email" placeholder="email" className="inputtype-style-one"></Field>
+                <div>
+                  <ErrorMessage name="email"></ErrorMessage>
+                </div>
+                <button type="submit" className="button-style-1" disabled={isSubmitting}>Inschrijven</button>
+              </Form>
+            )}
+          </Formik>
         </div>
       </Layout>
       <style jsx>{`
@@ -108,11 +138,13 @@ export default function Home() {
       }
 
       .container-subscribe p {
-        margin-top: 20px;
+        margin: 20px 0 40px 0;
       }
 
       form {
-        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+  
       }
 
       @media (min-width: 30em) {

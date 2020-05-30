@@ -14,10 +14,12 @@
     "@fortawesome/react-fontawesome": "^0.1.9",
     "@zeit/next-css": "^1.0.1",
     "axios": "^0.19.2",
+    "formik": "^2.1.4",
     "next": "9.4.2",
     "next-images": "^1.4.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "swr": "^0.2.2"
+    "swr": "^0.2.2",
+    "yup": "^0.29.1"
   }
 }
