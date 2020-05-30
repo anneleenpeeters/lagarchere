@@ -2,21 +2,14 @@ import Layout from "../components/Layout"
 import Head from 'next/head'
 import axios from "axios"
 import logoTitleImage from '../images/logo_title.png'
-import {useState, useEffect, useSWR} from "react"
+import useSWR from 'swr'
 import kamerImage from '../images/kamer_mainimg.jpg'
 
 
 
 const Kamer = () => {
-    const [data, setData] = useState([]);
-    useEffect(() => {
-        async function loadData(){
-            const response = await axios("https://wdev.be/wdev_anneleen/eindwerk/api/kamers");
-            setData(response.data['hydra:member']);
-            console.log(response.data['hydra:member']);
-        }
-        loadData();
-    },[]);
+    const {data} = useSWR("https://wdev.be/wdev_anneleen/eindwerk/api/kamers", (url) => axios(url).then(response => response.data['hydra:member']));
+
 
     return (
         <div>
@@ -26,7 +19,7 @@ const Kamer = () => {
             </Head>
             <Layout>
             <div className="kamer-container">
-            {data.map(k => ( 
+            {data?.map(k => ( 
                 <section>
                     <div className="kamer-section">
                         <div className="kamer-block-one">

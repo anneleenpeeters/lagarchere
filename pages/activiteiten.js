@@ -2,17 +2,10 @@ import Layout from "../components/Layout"
 import Head from 'next/head'
 import axios from "axios"
 import logoTitleImage from '../images/logo_title.png'
-import {useState, useEffect, useSWR} from "react"
+import useSWR from 'swr'
 
 const Activiteiten = () => {
-    const [data, setData] = useState([]);
-    useEffect(() => {
-        async function loadData(){
-            const response = await axios("https://wdev.be/wdev_anneleen/eindwerk/api/activiteits");
-            setData(response.data['hydra:member']);
-        }
-        loadData();
-    },[]);
+    const {data} = useSWR("https://wdev.be/wdev_anneleen/eindwerk/api/activiteits", (url) => axios(url).then(response => response.data['hydra:member']));
 
     return (
         <div>
@@ -22,7 +15,7 @@ const Activiteiten = () => {
             </Head>
         <Layout>
             <div className="activiteit-container">
-            {data.map(a => ( 
+            {data?.map(a => ( 
                 <section key={a.id}>
                     <h1  className="heading-style-1">{a.titel}</h1>
                     <div className="activiteit-grid">
