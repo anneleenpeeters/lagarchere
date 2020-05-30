@@ -3,7 +3,7 @@ import Link from 'next/link'
 const Bedankt = () => (
    <div>
        <div className="container-bedankt">
-            <h1 className="heading-style-2">Bedankt voor u aanvraag bij La Garchère.</h1>
+            <h1 className="heading-style-2">Bedankt voor uw aanvraag bij La Garchère.</h1>
             <p>Zodra u een bevestigingsmail hebt ontvangen kan u verzekerd zijn van u reservatie.</p>
             <Link href="/"><a className="button-style-3">Homepage</a></Link>
 

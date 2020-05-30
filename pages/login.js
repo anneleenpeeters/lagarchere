@@ -1,20 +1,22 @@
 import Layout from "../components/Layout"
-import Bedankt from "../components/Bedankt"
+import Head from 'next/head'
+import logoTitleImage from '../images/logo_title.png'
 
 function Login() {
     return (
+        
         <div>
-        <Layout>
-            <Bedankt />
-        </Layout>
-    {/* <style jsx>{`
-    .test {
-        background-color: red;
-    }
+            <Head>
+                <title>La Garchere - login</title>
+                <link rel="icon" href={logoTitleImage} type="image/icon type"/>
+            </Head>
+            <Layout>
+                <div className="container-login">
 
-    `}</style> */}
+                </div>
+            </Layout>
         </div>
     )
-  }
+}
   
   export default Login

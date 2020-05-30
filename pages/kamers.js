@@ -4,6 +4,7 @@ import axios from "axios"
 import logoTitleImage from '../images/logo_title.png'
 import useSWR from 'swr'
 import kamerImage from '../images/kamer_mainimg.jpg'
+import Link from "next/link"
 
 
 
@@ -37,7 +38,7 @@ const Kamer = () => {
                         </div>
                         <div className="kamer-block-two">
                             <img src={kamerImage} alt="jow"/>
-                            <a>Bekijk alle foto's</a>
+                            <Link as={`/kamers/${k.naam}`} href="kamers/[kamer]"><a>Bekijk alle foto's</a></Link>
                         </div>
                     </div>
                 </section>

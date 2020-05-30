@@ -20,7 +20,6 @@ const Nav = () => (
            <li className="login-word"><Link href="/login"><a>Login</a></Link></li>
            <li className="login-icon"><Link href="/login"><a><FontAwesomeIcon icon={faUser}/></a></Link></li>
         </ul>
-        
     </nav>
 
 );  

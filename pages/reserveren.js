@@ -1,19 +1,22 @@
 import Layout from "../components/Layout"
+import Head from 'next/head'
+import logoTitleImage from '../images/logo_title.png'
 
 function Reserveren() {
     return (
+        
         <div>
-        <Layout>
-            Reserveren
-        </Layout>
-    {/* <style jsx>{`
-    .test {
-        background-color: red;
-    }
+            <Head>
+                <title>La Garchere - Reservatie</title>
+                <link rel="icon" href={logoTitleImage} type="image/icon type"/>
+            </Head>
+            <Layout>
+                <div className="container-reserveren">
 
-    `}</style> */}
+                </div>
+            </Layout>
         </div>
     )
-  }
+}
   
   export default Reserveren

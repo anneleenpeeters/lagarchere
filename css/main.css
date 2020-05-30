@@ -95,7 +95,6 @@ body {
   padding: 8px 35px 5px 35px;
   background-color: #EAE3D2;
   border: 1px solid #EAE3D2;
-
 }
 
 .button-style-3:hover {
@@ -432,3 +431,39 @@ footer {
     margin: 0 40px;
   }
 }
+
+
+/* --------------------------------------------------
+    NAV DETAIL
+----------------------------------------------------- */
+
+.container-navdetail {
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.container-navdetail img {
+  width: 70px;
+  margin: 20px;
+}
+
+.icon-close:hover svg{
+  transform: scale(1.2);
+}
+
+.icon-close svg{
+  width: 20px;
+  margin: 20px;
+  transition: all .2s ease-out;
+
+}
+
+.icon-logo img{
+  transition: all .2s ease-out;
+}
+
+.icon-logo:hover img{
+  transform: scale(1.2);
+}
+
