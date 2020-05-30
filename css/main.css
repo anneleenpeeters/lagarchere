@@ -87,6 +87,23 @@ body {
   color: #1F1F1F;
 }
 
+.button-style-3 {
+  border-radius: 50px;
+  font-family: 'Hind', sans-serif;
+  color: #1F1F1F;
+  font-size: 1rem;
+  padding: 8px 35px 5px 35px;
+  background-color: #EAE3D2;
+  border: 1px solid #EAE3D2;
+
+}
+
+.button-style-3:hover {
+  background-color: transparent;
+  border: 1px solid #1F1F1F;
+  transition: all .5s;
+}
+
 .inputtype-style-one {
   background-color: #EAE3D2;
   padding: 10px 20px ;

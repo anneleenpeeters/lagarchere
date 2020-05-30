@@ -1,10 +1,11 @@
 import Layout from "../components/Layout"
+import Bedankt from "../components/Bedankt"
 
 function Login() {
     return (
         <div>
         <Layout>
-            login
+            <Bedankt />
         </Layout>
     {/* <style jsx>{`
     .test {
