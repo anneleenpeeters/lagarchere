@@ -7,9 +7,6 @@ import kamerImage from '../../images/kamer_mainimg.jpg'
 import mainImage from '../../images/contact_main.jpg'
 
 
-
-
-
 function Kamer() {
     const router = useRouter();
     return (
