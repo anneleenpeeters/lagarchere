@@ -112,6 +112,15 @@ body {
   font-family: 'Hind', sans-serif;
 }
 
+.inputtype-style-2 {
+  background-color: transparent;
+  padding: 5px 10px;
+  margin: 10px 0;
+  border: none;
+  border-bottom: 1px solid #1F1F1F;
+  font-family: 'Hind', sans-serif;
+}
+
 /* --------------------------------------------------
     NAVIGATIE
 ----------------------------------------------------- */
@@ -341,6 +350,7 @@ footer {
 
   .nav li {
     float: left;
+    font-size: 0.9rem;
   }
 
   .nav .menu {
@@ -467,3 +477,24 @@ footer {
   transform: scale(1.2);
 }
 
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+}
+
+.registratie-form {
+  width: 100%;
+}
+
+.registratie-form input {
+  width: 300px;
+}
+
+.form-error {
+  font-size: 0.8rem;
+  color: #a11000;
+  text-align: left;
+  margin-left: 12%;
+}
