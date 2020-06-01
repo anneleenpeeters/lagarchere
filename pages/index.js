@@ -8,12 +8,14 @@ import Link from 'next/link'
 import {Form, Formik, Field, ErrorMessage, formikHelpers} from 'formik'
 import {object, string} from 'yup';
 import axios from 'axios'
+import { useState } from 'react'
 
 const initialValues = {
   email: ''
 }
 
 export default function Home() {
+  const [message, setMessage] = useState('');
   return (
     <div className="container">
       <Head>
@@ -47,6 +49,7 @@ export default function Home() {
           }
           initialValues={initialValues} 
           onSubmit={(values, formikHelpers)=> {
+            setMessage("Joepie! Je ontvangt nu onze nieuwsbrieven!");
             axios.post("https://wdev.be/wdev_anneleen/eindwerk/api/subscribes", values)
             .then(function (response) {
               console.log(response);
@@ -63,6 +66,7 @@ export default function Home() {
                   <ErrorMessage name="email"></ErrorMessage>
                 </div>
                 <button type="submit" className="button-style-1" disabled={isSubmitting}>Inschrijven</button>
+                <p className="message-subscribe">{message}</p>
               </Form>
             )}
           </Formik>
@@ -144,7 +148,10 @@ export default function Home() {
       form {
         display: flex;
         flex-direction: column;
-  
+      }
+
+      .message-subscribe {
+        font-weight: 600;
       }
 
       @media (min-width: 30em) {
