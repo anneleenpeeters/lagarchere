@@ -49,13 +49,12 @@ export default function Home() {
           }
           initialValues={initialValues} 
           onSubmit={(values, formikHelpers)=> {
-            setMessage("Joepie! Je ontvangt nu onze nieuwsbrieven!");
             axios.post("https://wdev.be/wdev_anneleen/eindwerk/api/subscribes", values)
             .then(function (response) {
-              console.log(response);
+              setMessage("Joepie! Je ontvangt nu onze nieuwsbrieven!");
             })
             .catch(function (error) {
-              console.log(error);
+              setMessage("Oeps! Er liep iets fout!");
             });
             
           }}>

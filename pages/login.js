@@ -6,6 +6,7 @@ import {Form, Formik, Field, ErrorMessage, formikHelpers} from 'formik'
 import {object, string} from 'yup';
 import Link from 'next/link'
 import axios from 'axios';
+import { useState } from 'react'
 
 
 const initialValues = {
@@ -14,8 +15,8 @@ const initialValues = {
   }
 
 function Login() {
+    const [message, setMessage] = useState('');
     return (
-        
         <div>
             <Head>
                 <title>La Garchere - login</title>
@@ -26,6 +27,7 @@ function Login() {
                 <img className="bg-image" src={homeImage} alt="La Garchère kamer"/>
                 <div className="container-section">
                     <section className="section-login">
+                        <p className="message-login">{message}</p>
                         <h1 className="heading-style-2">Welkom!</h1>
                         <Formik 
                             validationSchema={
@@ -37,14 +39,14 @@ function Login() {
                             initialValues={initialValues} 
                             onSubmit={(values, formikHelpers)=> {
                                 console.log(values)
-                                axios.post("https://wdev.be/wdev_anneleen/eindwerk/api/", values)
+                                axios.post("https://wdev.be/wdev_anneleen/eindwerk/api/login_check", values)
                                 .then(function (response) {
-                                console.log(response);
+                                setMessage("Je bent nu ingelogd");
+                                window.location = "/reserveren"
                                 })
                                 .catch(function (error) {
-                                console.log(error);
+                                setMessage("Oeps! Er liep iets fout!");
                                 });
-                                
                             }}>
                                 {({values, errors, isSubmitting}) => (
                                 <Form className="login-form"> 
@@ -56,7 +58,7 @@ function Login() {
                                     <div>
                                     <ErrorMessage name="password"></ErrorMessage>
                                     </div>
-                                    <button type="submit" className="button-style-3" disabled={isSubmitting}>Inschrijven</button>
+                                    <button type="submit" className="button-style-3" disabled={isSubmitting}>Login</button>
                                 </Form>
                                 )}
                             </Formik>

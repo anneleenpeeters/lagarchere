@@ -4,6 +4,8 @@ import Nav from "../components/Nav"
 import {Form, Formik, Field, ErrorMessage, formikHelpers} from 'formik'
 import {object, string} from 'yup';
 import Link from 'next/link'
+import axios from 'axios'
+import { useState } from 'react';
 
 
 const initialValues = {
@@ -15,6 +17,8 @@ const initialValues = {
   }
 
 function Registratie() {
+    const [message, setMessage] = useState('');
+
     return (
         
         <div>
@@ -25,6 +29,7 @@ function Registratie() {
             <Nav />
             <div className="container-registratie">
                 <section className="section-login">
+                <p className="message-login">{message}</p>
                     <h1 className="heading-style-2">Maak een account</h1>
                     <p>Als je graag wilt reserveren, moet je eerst een account aan maken bij la Garchère.</p>
                     <Formik 
@@ -39,13 +44,15 @@ function Registratie() {
                         }
                         initialValues={initialValues} 
                         onSubmit={(values, formikHelpers)=> {
-                                // axios.post("https://wdev.be/wdev_anneleen/eindwerk/api/", values)
-                                // .then(function (response) {
-                                // console.log(response);
-                                // })
-                                // .catch(function (error) {
-                                // console.log(error);
-                                // });
+                            console.log(values)
+                                axios.post("https://wdev.be/wdev_anneleen/eindwerk/api/users", values)
+                                .then(function (response) {
+                                setMessage("Gelukt! Welkom bij la Garchère");
+                                window.location = "/"
+                                })
+                                .catch(function (error) {
+                                 setMessage("Oeps! Er liep iets fout!");
+                                });
                                 
                         }}>
                         {({values, errors, isSubmitting}) => (
