@@ -6,6 +6,7 @@ import {object, string} from 'yup';
 import Link from 'next/link'
 import axios from 'axios'
 import { useState } from 'react';
+import mainLogoImage from '../images/main_logo.png'
 
 
 const initialValues = {
@@ -23,8 +24,14 @@ function Registratie() {
         
         <div>
             <Head>
-                <title>La Garchere - registratie</title>
-                <link rel="icon" href={logoTitleImage} type="image/icon type"/>
+$               <link rel="icon" href={logoTitleImage} type="image/icon type"/>
+                <title>La Garchère - Registratie</title>
+                <meta name="title" content="La Garchère - Registratie" />
+                <meta name="description" content="Maak een account aan bij la Garchère en reserveer jou gewenste kamer. Kom tot rust en geniet van de rust." />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="La Garchère - Registratie" />
+                <meta property="og:description" content="Maak een account aan bij la Garchère en reserveer jou gewenste kamer. Kom tot rust en geniet van de rust." />
+                <meta property="og:image" content={mainLogoImage} />
             </Head>
             <Nav />
             <div className="container-registratie">

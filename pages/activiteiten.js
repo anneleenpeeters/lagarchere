@@ -3,6 +3,8 @@ import Head from 'next/head'
 import axios from "axios"
 import logoTitleImage from '../images/logo_title.png'
 import useSWR from 'swr'
+import mainLogoImage from '../images/main_logo.png'
+
 
 const Activiteiten = () => {
     const {data} = useSWR("https://wdev.be/wdev_anneleen/eindwerk/api/activiteits", (url) => axios(url).then(response => response.data['hydra:member']));
@@ -10,8 +12,14 @@ const Activiteiten = () => {
     return (
         <div>
             <Head>
-                <title>La Garchere - Activiteiten</title>
                 <link rel="icon" href={logoTitleImage} type="image/icon type"/>
+                <title>La Garchère - Activiteiten</title>
+                <meta name="title" content="La Garchère - Activiteiten" />
+                <meta name="description" content="Rondom het hotel la Garchère zijn er veel activiteiten te beleven. In deze steek zijn er diverse wijnroutes, kastelen en golfbanen. Op onze website vind u allerlei informatie hierover." />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="La Garchère - Activiteiten" />
+                <meta property="og:description" content="Rondom het hotel la Garchère zijn er veel activiteiten te beleven. In deze steek zijn er diverse wijnroutes, kastelen en golfbanen. Op onze website vind u allerlei informatie hierover." />
+                <meta property="og:image" content={mainLogoImage} />
             </Head>
         <Layout>
             <div className="activiteit-container">
