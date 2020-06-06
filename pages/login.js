@@ -5,10 +5,11 @@ import homeImage from '../images/home_main.jpg'
 import {Form, Formik, Field, ErrorMessage, formikHelpers} from 'formik'
 import {object, string} from 'yup';
 import Link from 'next/link'
+import axios from 'axios';
 
 
 const initialValues = {
-    email: '',
+    username: '',
     password: ''
   }
 
@@ -29,26 +30,27 @@ function Login() {
                         <Formik 
                             validationSchema={
                                 object({
-                                email: string().required(),
-                                password: string().required()
+                                username: string().required(),
+                                password: string().required().min(8)
                                 })
                             }
                             initialValues={initialValues} 
                             onSubmit={(values, formikHelpers)=> {
-                                // axios.post("https://wdev.be/wdev_anneleen/eindwerk/api/", values)
-                                // .then(function (response) {
-                                // console.log(response);
-                                // })
-                                // .catch(function (error) {
-                                // console.log(error);
-                                // });
+                                console.log(values)
+                                axios.post("https://wdev.be/wdev_anneleen/eindwerk/api/", values)
+                                .then(function (response) {
+                                console.log(response);
+                                })
+                                .catch(function (error) {
+                                console.log(error);
+                                });
                                 
                             }}>
                                 {({values, errors, isSubmitting}) => (
                                 <Form className="login-form"> 
-                                    <Field name="email" type="email" placeholder="email" className="inputtype-style-2"></Field>
+                                    <Field name="username" type="email" placeholder="email" className="inputtype-style-2"></Field>
                                     <div>
-                                    <ErrorMessage name="email"></ErrorMessage>
+                                    <ErrorMessage name="username"></ErrorMessage>
                                     </div>
                                     <Field name="password" type="password" placeholder="wachtwoord" className="inputtype-style-2"></Field>
                                     <div>

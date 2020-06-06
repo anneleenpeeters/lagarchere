@@ -3,14 +3,11 @@ import Head from 'next/head'
 import axios from "axios"
 import logoTitleImage from '../images/logo_title.png'
 import useSWR from 'swr'
-import kamerImage from '../images/kamer_mainimg.jpg'
 import Link from "next/link"
-
-
 
 const Kamer = () => {
     const {data} = useSWR("https://wdev.be/wdev_anneleen/eindwerk/api/kamers", (url) => axios(url).then(response => response.data['hydra:member']));
-
+    console.log(data);
 
     return (
         <div>
@@ -37,7 +34,7 @@ const Kamer = () => {
                             ))}
                         </div>
                         <div className="kamer-block-two">
-                            <img src={kamerImage} alt="jow"/>
+                            <img src={`https://wdev.be/wdev_anneleen/eindwerk/images/kamer/${k.thumbnail}`} alt="jow"/>
                             <Link as={`/kamers/${k.naam}`} href="kamers/[kamer]"><a>Bekijk alle foto's</a></Link>
                         </div>
                     </div>

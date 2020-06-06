@@ -3,12 +3,13 @@ import Head from 'next/head'
 import logoTitleImage from '../../images/logo_title.png'
 import NavDetail from '../../components/NavDetail';
 import Link from 'next/link'
-import kamerImage from '../../images/kamer_mainimg.jpg'
-import mainImage from '../../images/contact_main.jpg'
+
+
 
 
 function Kamer() {
     const router = useRouter();
+
     return (
         <div>
             <Head>
@@ -19,11 +20,7 @@ function Kamer() {
             <div className="container-kamerdetail">
                 <h1 className="heading-style-1">{router.query.kamer}</h1>
                 <div className="masonry">
-                    <img src={logoTitleImage} />
-                    <img src={kamerImage} />
-                    <img src={kamerImage} />
-                    <img src={mainImage} />
-                    <img src={mainImage} />
+                    <p>test</p>
                 </div>
                 <Link href="/reserveren"><a className="button-style-2">Reserveren</a></Link>
             </div>
