@@ -42,7 +42,7 @@ const Kamer = () => {
                             ))}
                         </div>
                         <div className="kamer-block-two">
-                            <img src={`https://wdev.be/wdev_anneleen/eindwerk/images/kamer/${k.thumbnail}`} alt="jow"/>
+                            <img src={`https://wdev.be/wdev_anneleen/eindwerk/images/kamer/${k.thumbnail}`} alt={k.naam}/>
                             <Link as={`/kamers/${k.naam}`} href="kamers/[kamer]"><a>Bekijk alle foto's</a></Link>
                         </div>
                     </div>

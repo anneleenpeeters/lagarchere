@@ -3,12 +3,21 @@ import Head from 'next/head'
 import logoTitleImage from '../images/logo_title.png'
 import Link from 'next/link'
 import mainLogoImage from '../images/main_logo.png'
-
+import useSWR from 'swr'
+import axios from 'axios'
+import { useState } from "react"
 
 
 function Reserveren() {
+    const {data} = useSWR("https://wdev.be/wdev_anneleen/eindwerk/api/kamers", (url) => axios(url).then(response => response.data['hydra:member']));
+    console.log(data);
+    const [kamer, setKamer] = useState('');
+
+    function gewensteKamer(e){
+        setKamer('/wdev_anneleen/eindwerk/api/kamers/' + e.target.value);
+    }
+
     return (
-        
         <div>
             <Head>
                 <link rel="icon" href={logoTitleImage} type="image/icon type"/>
@@ -40,11 +49,28 @@ function Reserveren() {
                     <section className="section-reserveren">
                         <h1 className="heading-style-1">Reserveren</h1>
                         <h2 className="heading-style-2">Selecteer uw gewenste kamer</h2>
-                        <h2 className="heading-style-2">Selecteer uw datum</h2>
-                    </section>
-                    <div className="button-overzicht">
+                        <div className="grid-kamerkeuze">
+                            {data?.map(k => ( 
+                                <div key={k.id} className="container-kamerkeuze">
+                                    <label htmlFor={k.naam} className="radio-img">
+                                        <input type="radio" id={k.naam} name="kamerkeuze" value={k.id} onChange={gewensteKamer} />
+                                        <img src={`https://wdev.be/wdev_anneleen/eindwerk/images/kamer/${k.thumbnail}`} alt={k.naam} />
+                                        <p>Kamer {k.naam}</p>
+                                    </label>
+                                </div>
+                            ))}
+                        </div>
+                        <p>{kamer}</p>
+                        <div>
+                            <h2 className="heading-style-2">Selecteer uw datum</h2>
+
+
+                        </div>
+                        <div className="button-overzicht">
                         <Link href="/"><a className="button-style-2">Ga naar overzicht</a></Link>
                     </div>
+                    </section>
+                    
                 </div>
             </Layout>
             <style jsx>{`
@@ -83,8 +109,42 @@ function Reserveren() {
                 font-family: 'Abhaya Libre', serif;
                 text-transform: uppercase;
                 padding: 10px 25px;
-
             }
+
+            .section-reserveren img {
+                height: 380px;
+                width: 80%;
+                object-fit: cover;
+            }
+
+            .container-kamerkeuze {
+                margin: 30px 0;
+            }
+
+            .container-kamerkeuze p {
+                text-align: center;
+                font-size: 1.2rem;
+                font-weight: 300;
+                transition: all 500ms;
+            }
+
+            .radio-img  > input { 
+                display: none;
+              }
+              
+            .radio-img  > img{
+                cursor: pointer;
+                opacity: 0.7;
+                transition: all 500ms;
+            }
+              
+            .radio-img  > input:checked + img { 
+                opacity: 1;
+            }
+
+            .radio-img  > input:checked ~ p {
+                font-weight: 600;
+            } 
 
             @media (min-width: 35em) {
                 .container-reserveren .section-seizoen{
@@ -105,6 +165,22 @@ function Reserveren() {
                     display: grid;
                     grid-template-columns: auto auto;
                     grid-column-gap: 60px;
+                }
+
+                .grid-kamerkeuze {
+                    display: grid;
+                    grid-template-columns: auto auto;
+                    grid-column-gap: 50px;
+                }
+
+                .section-reserveren img {
+                    height: 490px;
+                    justify-content: center;
+                    width: 100%;
+                }
+
+                .section-reserveren label {
+                   
                 }
             }
 
