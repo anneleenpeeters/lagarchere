@@ -7,15 +7,40 @@ import useSWR from 'swr'
 import axios from 'axios'
 import { useState } from "react"
 
+import { DateRangePicker} from 'react-dates';
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+
+
+
+
 
 function Reserveren() {
     const {data} = useSWR("https://wdev.be/wdev_anneleen/eindwerk/api/kamers", (url) => axios(url).then(response => response.data['hydra:member']));
     console.log(data);
     const [kamer, setKamer] = useState('');
 
+    const [dateRange, setdateRange] = useState({
+        startDate: null,
+        endDate: null
+      });
+      const [focus, setFocus] = useState(null);
+    
+      const { startDate, endDate } = dateRange;
+    
+      const handleOnDateChange = (startDate, endDate) =>
+        setdateRange(startDate, endDate);
+
+        console.log(startDate)
+        console.log(endDate)
+
+     
+
     function gewensteKamer(e){
         setKamer('/wdev_anneleen/eindwerk/api/kamers/' + e.target.value);
     }
+
+   
 
     return (
         <div>
@@ -63,8 +88,27 @@ function Reserveren() {
                         <p>{kamer}</p>
                         <div>
                             <h2 className="heading-style-2">Selecteer uw datum</h2>
+                            <div className="data-wrapper">
+                            <DateRangePicker
+                                startDatePlaceholderText="Aankomst"
+                                startDate={startDate}
+                                onDatesChange={handleOnDateChange}
+                                endDatePlaceholderText="Vertrek"
+                                endDate={endDate}
+                                numberOfMonths={2}
+                                displayFormat="D MMM YYYY"
+                                showClearDates={true}
+                                focusedInput={focus}
+                                onFocusChange={focus => setFocus(focus)}
+                                startDateId="startDateMookh"
+                                endDateId="endDateMookh"
+                                minimumNights={0}
+                                firstDayOfWeek={1}
+                            />
 
-
+                            </div>
+                            
+                           
                         </div>
                         <div className="button-overzicht">
                         <Link href="/"><a className="button-style-2">Ga naar overzicht</a></Link>
@@ -79,7 +123,7 @@ function Reserveren() {
                 padding: 40px;
                 text-align: center;
             }
-
+            
             .section-seizoen h1,
             .section-reserveren h1 {
                 margin: 40px 0;
