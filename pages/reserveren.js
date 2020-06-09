@@ -5,7 +5,7 @@ import Link from 'next/link'
 import mainLogoImage from '../images/main_logo.png'
 import useSWR from 'swr'
 import axios from 'axios'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 import { DateRangePicker} from 'react-dates';
 import 'react-dates/initialize';
@@ -22,19 +22,41 @@ function Reserveren() {
         endDate: null
     });
 
+    const [aankomst, setAankomst] = useState(null);
+    const [vertrek, setVertrek] = useState(null);
+
     const { startDate, endDate } = dateRange;
+    const handleOnDateChange = (startDate, endDate) => setdateRange(startDate, endDate);
 
-    const handleOnDateChange = (startDate, endDate) =>
-        setdateRange(startDate, endDate);
-
-       
-    console.log(convertDate(startDate['_d']))
-    console.log(convertDate(endDate['_d']))
-
+    useEffect(() => {
+        setAankomst(convertDate(dateRange.startDate));
+        setVertrek(convertDate(dateRange.endDate));
+    })
     
 
     function gewensteKamer(e){
         setKamer('/wdev_anneleen/eindwerk/api/kamers/' + e.target.value);
+
+        if(kamer === ''){
+            document.querySelector('.selecteer-datum').style.display ='inherit';
+        }
+    }
+
+    function handleOnSubmit(){
+        console.log('submit');
+        axios.post("https://wdev.be/wdev_anneleen/eindwerk/api/reservaties", {
+            "aankomst": aankomst,
+            "vertrek": vertrek,
+            "kamer": kamer,
+            "goedgekeurd": false,
+            "user": "/wdev_anneleen/eindwerk/api/users/4"
+          })
+          .then(function (response) {
+            console.log('test');
+          })
+          .catch(function (error) {
+            console.log(error);
+        });
     }
 
     return (
@@ -80,8 +102,7 @@ function Reserveren() {
                                 </div>
                             ))}
                         </div>
-                        <p>{kamer}</p>
-                        <div>
+                        <div className="selecteer-datum">
                             <h2 className="heading-style-2">Selecteer uw datum</h2>
                             <div className="data-wrapper">
                             <DateRangePicker
@@ -103,13 +124,17 @@ function Reserveren() {
                             </div>
                         </div>
                         <div className="button-overzicht">
-                        <Link href="/"><a className="button-style-2">Ga naar overzicht</a></Link>
+                        <button className="button-style-2" onClick={handleOnSubmit}>Ga naar overzicht</button>
                     </div>
                     </section>
                     
                 </div>
             </Layout>
             <style jsx>{`
+
+            .selecteer-datum {
+                display: none;
+            }
             .container-reserveren .section-seizoen,
             .container-reserveren .section-reserveren {
                 padding: 40px;
