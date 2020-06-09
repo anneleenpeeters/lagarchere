@@ -3,8 +3,14 @@ import Head from 'next/head'
 import logoTitleImage from '../../images/logo_title.png'
 import NavDetail from '../../components/NavDetail';
 import Link from 'next/link'
+import axios from "axios"
 
-function Kamer() {
+
+function Kamer({data}) {
+
+    console.log(data);
+
+
     const router = useRouter();
 
     return (
@@ -19,7 +25,10 @@ function Kamer() {
             <div className="container-kamerdetail">
                 <h1 className="heading-style-1">{router.query.kamer}</h1>
                 <div className="masonry">
-                    <p>test</p>
+                {data.map(k => ( 
+                    <p>{k.naam}</p>
+                ))}
+                    
                 </div>
                 <Link href="/reserveren"><a className="button-style-2">Reserveren</a></Link>
             </div>
@@ -71,5 +80,13 @@ function Kamer() {
             
     )
 }
+
+export const getServerSideProps = async (ctx) => {
+    const res = await axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/kamers/${ctx.query.id}`);
+    const data = res.data['hydra:member'];
+    console.log(data)
+    return { props: {data}};
+};
+
   
-  export default Kamer
+export default Kamer

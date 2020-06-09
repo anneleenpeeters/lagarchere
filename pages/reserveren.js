@@ -10,37 +10,32 @@ import { useState } from "react"
 import { DateRangePicker} from 'react-dates';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
-
-
-
+import {convertDate} from '../helpers.js'
 
 
 function Reserveren() {
     const {data} = useSWR("https://wdev.be/wdev_anneleen/eindwerk/api/kamers", (url) => axios(url).then(response => response.data['hydra:member']));
-    console.log(data);
     const [kamer, setKamer] = useState('');
-
+    const [focus, setFocus] = useState(null);
     const [dateRange, setdateRange] = useState({
         startDate: null,
         endDate: null
-      });
-      const [focus, setFocus] = useState(null);
-    
-      const { startDate, endDate } = dateRange;
-    
-      const handleOnDateChange = (startDate, endDate) =>
+    });
+
+    const { startDate, endDate } = dateRange;
+
+    const handleOnDateChange = (startDate, endDate) =>
         setdateRange(startDate, endDate);
 
-        console.log(startDate)
-        console.log(endDate)
+       
+    console.log(convertDate(startDate['_d']))
+    console.log(convertDate(endDate['_d']))
 
-     
+    
 
     function gewensteKamer(e){
         setKamer('/wdev_anneleen/eindwerk/api/kamers/' + e.target.value);
     }
-
-   
 
     return (
         <div>
@@ -105,10 +100,7 @@ function Reserveren() {
                                 minimumNights={0}
                                 firstDayOfWeek={1}
                             />
-
                             </div>
-                            
-                           
                         </div>
                         <div className="button-overzicht">
                         <Link href="/"><a className="button-style-2">Ga naar overzicht</a></Link>
@@ -189,6 +181,8 @@ function Reserveren() {
             .radio-img  > input:checked ~ p {
                 font-weight: 600;
             } 
+
+            
 
             @media (min-width: 35em) {
                 .container-reserveren .section-seizoen{

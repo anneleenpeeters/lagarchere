@@ -2,13 +2,13 @@ import Layout from "../components/Layout"
 import Head from 'next/head'
 import axios from "axios"
 import logoTitleImage from '../images/logo_title.png'
-import useSWR from 'swr'
+//import useSWR from 'swr'
 import Link from "next/link"
 import kamerImage from '../images/kamer_mainimg.jpg'
 
 
-const Kamer = () => {
-    const {data} = useSWR("https://wdev.be/wdev_anneleen/eindwerk/api/kamers", (url) => axios(url).then(response => response.data['hydra:member']));
+function Kamer ({data}) {
+    // const {data} = useSWR("https://wdev.be/wdev_anneleen/eindwerk/api/kamers", (url) => axios(url).then(response => response.data['hydra:member']));
     console.log(data);
 
     return (
@@ -25,7 +25,7 @@ const Kamer = () => {
             </Head>
             <Layout>
             <div className="kamer-container">
-            {data?.map(k => ( 
+            {data.map(k => ( 
                 <section>
                     <div className="kamer-section">
                         <div className="kamer-block-one">
@@ -200,7 +200,6 @@ const Kamer = () => {
                       color: #1F1F1F;
                       border-bottom 1px solid #1F1F1F;
                   }
-
             }
 
             @media (min-width: 73em) {
@@ -219,8 +218,14 @@ const Kamer = () => {
     )
   }
   
-  export default Kamer
+export const getServerSideProps = async () => {
+    const res = await axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/kamers`)
+    const data = res.data['hydra:member'];
+    return { props: {data}};
+};
 
+
+export default Kamer
 
 
 
