@@ -7,7 +7,7 @@ import {object, string} from 'yup';
 import Link from 'next/link'
 import axios from 'axios';
 import { useState } from 'react'
-import { parseCookies, setCookie } from 'nookies'
+import { setCookie } from 'nookies'
 
 
 const initialValues = {
@@ -16,7 +16,6 @@ const initialValues = {
   }
 
 function Login() {
-    const cookies = parseCookies;
 
     const [message, setMessage] = useState('');
     return (
@@ -51,13 +50,12 @@ function Login() {
                                 axios.post("https://wdev.be/wdev_anneleen/eindwerk/api/login_check", values)
                                 .then(function (response) {
                                 setMessage("Je bent nu ingelogd");
-                                setCookie(null, "jwtToken", response.data.token, {
-                                    maxAge: 60 * 60,
-                                    path: "/",
-                                  });
+                                    setCookie(null, "jwtToken", response.data.token, {
+                                        maxAge: 60 * 60,
+                                        path: "/",
+                                    });
+                                    window.location = "/"
                                 })
-                                window.location = "/"
-
                                 .catch(function (error) {
                                 setMessage("Oeps! Er liep iets fout!");
                                 });
@@ -145,11 +143,6 @@ function Login() {
     )
 }
 
-export const getServerSideProps = async (ctx) => {
-    let getCookie = parseCookies(ctx)
-    let cookies = getCookie.jwtToken;
-    console.log(cookies)
-    return {props: {}};
-}
+
   
   export default Login

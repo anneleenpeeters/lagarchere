@@ -11,9 +11,11 @@ import { DateRangePicker} from 'react-dates';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import {convertDate} from '../helpers.js'
+import { parseCookies } from 'nookies'
 
 
 function Reserveren() {
+    const cookies = parseCookies;
     const {data} = useSWR("https://wdev.be/wdev_anneleen/eindwerk/api/kamers", (url) => axios(url).then(response => response.data['hydra:member']));
     const [kamer, setKamer] = useState('');
     const [focus, setFocus] = useState(null);
@@ -261,5 +263,15 @@ function Reserveren() {
         </div>
     )
 }
+
+export const getServerSideProps = async (ctx) => {
+    const cookies = parseCookies(ctx)
+    const jwt = cookies.jwtToken;
+    if (typeof jwt === "undefined") {
+        ctx.res.statusCode = 302;
+        ctx.res.setHeader("Location", "/registratie");
+    }
+    return {props: {}};
+}
   
-  export default Reserveren
+export default Reserveren
