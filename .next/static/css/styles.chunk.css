@@ -613,7 +613,7 @@ footer {
 .data-wrapper .CalendarDay__selected:hover,
 .data-wrapper .CalendarDay__selected_span:hover {
   background: #264F47;
-  border: 1px double #264F47;
+  border: 1px double #264F47 ;
 }
 
 .data-wrapper .CalendarDay__selected_span,
@@ -635,8 +635,6 @@ footer {
 .data-wrapper .DayPickerNavigation_button__default:active  {
   border: none;
 }
-
-
 
 .PresetDateRangePicker_panel {
   padding: 0 22px 11px
