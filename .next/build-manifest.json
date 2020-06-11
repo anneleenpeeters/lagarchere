@@ -9,6 +9,12 @@
     "static/development/_ssgManifest.js"
   ],
   "pages": {
+    "/": [
+      "static/runtime/webpack.js",
+      "static/css/styles.chunk.css",
+      "static/chunks/styles.js",
+      "static/runtime/main.js"
+    ],
     "/_app": [
       "static/runtime/webpack.js",
       "static/css/styles.chunk.css",
@@ -22,14 +28,24 @@
     "/_polyfills": [
       "static/runtime/polyfills.js"
     ],
-    "/kamers": [
+    "/index": [
       "static/runtime/webpack.js",
       "static/css/styles.chunk.css",
       "static/chunks/styles.js",
       "static/runtime/main.js"
     ],
-    "/kamers/[id]": [
+    "/login": [
       "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/registratie": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/reserveren": [
+      "static/runtime/webpack.js",
+      "static/css/styles.chunk.css",
+      "static/chunks/styles.js",
       "static/runtime/main.js"
     ]
   }

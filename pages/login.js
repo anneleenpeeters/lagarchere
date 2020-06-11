@@ -2,12 +2,14 @@ import Head from 'next/head'
 import logoTitleImage from '../images/logo_title.png'
 import Nav from "../components/Nav"
 import homeImage from '../images/home_main.jpg'
-import {Form, Formik, Field, ErrorMessage, formikHelpers} from 'formik'
+import {Form, Formik, Field, ErrorMessage, formikHelpers, setIn} from 'formik'
 import {object, string} from 'yup';
 import Link from 'next/link'
 import axios from 'axios';
-import { useState } from 'react'
-import { setCookie } from 'nookies'
+import { useState, useEffect } from 'react'
+import { setCookie, parseCookies, destroyCookie } from 'nookies'
+import Router from "next/router";
+
 
 
 const initialValues = {
@@ -15,9 +17,24 @@ const initialValues = {
     password: ''
   }
 
-function Login() {
-
+function Login({jwt}) {
     const [message, setMessage] = useState('');
+    const [ingelogd, setIngelogd] = useState(false);
+
+    useEffect(() => {
+        if (typeof jwt !== "undefined") {
+            setIngelogd(true);
+        } else {
+            setIngelogd(false);
+        }
+    }, [])
+
+    function logout()  {
+        destroyCookie(null, "jwtToken");
+        Router.push("/");
+    }
+   
+    
     return (
         <div>
             <Head>
@@ -35,51 +52,62 @@ function Login() {
             <div className="container-login">
                 <img className="bg-image" src={homeImage} alt="La Garchère kamer"/>
                 <div className="container-section">
-                    <section className="section-login">
-                        <p className="message-login">{message}</p>
-                        <h1 className="heading-style-2">Welkom!</h1>
-                        <Formik 
-                            validationSchema={
-                                object({
-                                username: string().required(),
-                                password: string().required().min(8)
-                                })
-                            }
-                            initialValues={initialValues} 
-                            onSubmit={(values, formikHelpers)=> {
-                                axios.post("https://wdev.be/wdev_anneleen/eindwerk/api/login_check", values)
-                                .then(function (response) {
-                                setMessage("Je bent nu ingelogd");
-                                    setCookie(null, "jwtToken", response.data.token, {
-                                        maxAge: 60 * 60,
-                                        path: "/",
-                                    });
-                                    window.location = "/"
-                                })
-                                .catch(function (error) {
-                                setMessage("Oeps! Er liep iets fout!");
-                                });
-                            }}>
-                                {({values, errors, isSubmitting}) => (
-                                <Form className="login-form"> 
-                                    <Field name="username" type="email" placeholder="email" className="inputtype-style-2"></Field>
-                                    <div>
-                                    <ErrorMessage name="username"></ErrorMessage>
-                                    </div>
-                                    <Field name="password" type="password" placeholder="wachtwoord" className="inputtype-style-2"></Field>
-                                    <div>
-                                    <ErrorMessage name="password"></ErrorMessage>
-                                    </div>
-                                    <button type="submit" className="button-style-3" disabled={isSubmitting}>Login</button>
-                                </Form>
-                                )}
-                            </Formik>
-                        <Link href="/registratie"><a>Ik heb nog geen account</a></Link>
-
-                    </section>
+                    {ingelogd ? (
+                        <div className="ingelogd-container">
+                            <p>wel ingelogd</p>
+                            <button className="button-style-3" onClick={logout}>logout</button>
+                        </div>
+                    ) : (
+                        <div>
+                            <section className="section-login">
+                                <p className="message-login">{message}</p>
+                                <h1 className="heading-style-2">Welkom!</h1>
+                                <Formik 
+                                    validationSchema={
+                                        object({
+                                        username: string().required(),
+                                        password: string().required().min(8)
+                                        })
+                                    }
+                                    initialValues={initialValues} 
+                                    onSubmit={(values, formikHelpers)=> {
+                                        axios.post("https://wdev.be/wdev_anneleen/eindwerk/api/login_check", values)
+                                        .then(function (response) {
+                                        setMessage("Je bent nu ingelogd");
+                                            setCookie(null, "jwtToken", response.data.token, {
+                                                maxAge: 60 * 60,
+                                                path: "/",
+                                            });
+                                            window.location = "/"
+                                        })
+                                        .catch(function (error) {
+                                        setMessage("Oeps! Er liep iets fout!");
+                                        });
+                                    }}>
+                                        {({values, errors, isSubmitting}) => (
+                                        <Form className="login-form"> 
+                                            <Field name="username" type="email" placeholder="email" className="inputtype-style-2"></Field>
+                                            <div>
+                                            <ErrorMessage name="username"></ErrorMessage>
+                                            </div>
+                                            <Field name="password" type="password" placeholder="wachtwoord" className="inputtype-style-2"></Field>
+                                            <div>
+                                            <ErrorMessage name="password"></ErrorMessage>
+                                            </div>
+                                            <button type="submit" className="button-style-3" disabled={isSubmitting}>Login</button>
+                                        </Form>
+                                        )}
+                                    </Formik>
+                                <Link href="/registratie"><a>Ik heb nog geen account</a></Link>
+                            </section>
+                        </div>
+                    )}
                 </div>   
             </div>
             <style jsx>{`
+                .ingelogd-container {
+                    background-color: white;
+                }
                 .container-login .bg-image {
                     width: 100vw;
                     height: 91vh;
@@ -142,7 +170,15 @@ function Login() {
         </div>
     )
 }
+export const getServerSideProps = async (ctx) => {
+    const cookies = parseCookies(ctx)
+    const jwt = cookies.jwtToken;
+    if(typeof jwt === "undefined"){
+        return{ props: {} }
+    } else {
+        return { props: {jwt} };
 
-
+    }
+}
   
-  export default Login
+export default Login
