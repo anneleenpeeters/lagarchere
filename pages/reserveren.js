@@ -30,7 +30,7 @@ function Reserveren({data}) {
     useEffect(() => {
         setAankomst(convertDate(dateRange.startDate));
         setVertrek(convertDate(dateRange.endDate));
-    })
+    },[])
     
 
     function gewensteKamer(e){
@@ -205,8 +205,6 @@ function Reserveren({data}) {
             .radio-img  > input:checked ~ p {
                 font-weight: 600;
             } 
-
-            
 
             @media (min-width: 35em) {
                 .container-reserveren .section-seizoen{

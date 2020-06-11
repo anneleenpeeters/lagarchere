@@ -10,8 +10,6 @@ import { useState, useEffect } from 'react'
 import { setCookie, parseCookies, destroyCookie } from 'nookies'
 import Router from "next/router";
 
-
-
 const initialValues = {
     username: '',
     password: ''
@@ -54,7 +52,12 @@ function Login({jwt}) {
                 <div className="container-section">
                     {ingelogd ? (
                         <div className="ingelogd-container">
-                            <p>wel ingelogd</p>
+                            <h1 className="heading-style-2">Welkom, NAAM</h1>
+                            <h2 className="heading-style-3">Jouw gegevens</h2>
+                            <p>Voornaam</p>
+                            <p>Achternaam</p>
+                            <p>Email</p>
+                            <p>Telefoonnummer</p>
                             <button className="button-style-3" onClick={logout}>logout</button>
                         </div>
                     ) : (
@@ -177,7 +180,6 @@ export const getServerSideProps = async (ctx) => {
         return{ props: {} }
     } else {
         return { props: {jwt} };
-
     }
 }
   
