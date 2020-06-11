@@ -7,23 +7,21 @@ import axios from "axios"
 
 
 function Kamer({data}) {
-    console.log(data);
-
     return (
         <div>
             <Head>
-                <title>La Garchere - Kamer</title>
+                <title>La Garchere - Kamer {data.naam}</title>
                 <link rel="icon" href={logoTitleImage} type="image/icon type"/>
                 <meta property="og:type" content="website" />
                 <meta property="og:description" content="Elke kamer heeft zijn eigen thema. Kies een kamer die jou het meeste aanspreekt om de ultieme ervaring te beleven." />
             </Head>
             <NavDetail />
             <div className="container-kamerdetail">
-                <h1 className="heading-style-1">test</h1>
+                <h1 className="heading-style-1">{data.naam}</h1>
                 <div className="masonry">
-                {data.map(k => ( 
-                    <p>{k.naam}</p>
-                ))}
+               {data.kamerImages.map(i =>
+               <img src={`https://wdev.be/wdev_anneleen/eindwerk/images/kamer/${i.image}`} />
+                )}
                     
                 </div>
                 <Link href="/reserveren"><a className="button-style-2">Reserveren</a></Link>
@@ -77,8 +75,7 @@ function Kamer({data}) {
 
 export const getServerSideProps = async (ctx) => {
     const res = await axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/kamers/${ctx.query.id}`);
-    const data = res.data['hydra:member'];
-    console.log(data)
+    const data = res.data;
     return { props: {data}};
 };
 

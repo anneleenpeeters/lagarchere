@@ -2,15 +2,12 @@ import Layout from "../components/Layout"
 import Head from 'next/head'
 import axios from "axios"
 import logoTitleImage from '../images/logo_title.png'
-//import useSWR from 'swr'
 import Link from "next/link"
 import kamerImage from '../images/kamer_mainimg.jpg'
 
 
 function Kamer ({data}) {
-    // const {data} = useSWR("https://wdev.be/wdev_anneleen/eindwerk/api/kamers", (url) => axios(url).then(response => response.data['hydra:member']));
     console.log(data);
-
     return (
         <div>
             <Head>
@@ -43,7 +40,7 @@ function Kamer ({data}) {
                         </div>
                         <div className="kamer-block-two">
                             <img src={`https://wdev.be/wdev_anneleen/eindwerk/images/kamer/${k.thumbnail}`} alt={k.naam}/>
-                            <Link as={`/kamers/${k.naam}`} href="kamers/[kamer]"><a>Bekijk alle foto's</a></Link>
+                            <Link as={`/kamers/${k.id}`} href="kamers/[id]"><a>Bekijk alle foto's</a></Link>
                         </div>
                     </div>
                 </section>

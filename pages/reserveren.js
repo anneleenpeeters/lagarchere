@@ -1,9 +1,7 @@
 import Layout from "../components/Layout"
 import Head from 'next/head'
 import logoTitleImage from '../images/logo_title.png'
-import Link from 'next/link'
 import mainLogoImage from '../images/main_logo.png'
-import useSWR from 'swr'
 import axios from 'axios'
 import { useState, useEffect } from "react"
 
@@ -14,9 +12,8 @@ import {convertDate} from '../helpers.js'
 import { parseCookies } from 'nookies'
 
 
-function Reserveren() {
+function Reserveren({data}) {
     const cookies = parseCookies;
-    const {data} = useSWR("https://wdev.be/wdev_anneleen/eindwerk/api/kamers", (url) => axios(url).then(response => response.data['hydra:member']));
     const [kamer, setKamer] = useState('');
     const [focus, setFocus] = useState(null);
     const [dateRange, setdateRange] = useState({
@@ -265,13 +262,17 @@ function Reserveren() {
 }
 
 export const getServerSideProps = async (ctx) => {
+    const res = await axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/kamers`)
+    const data = res.data['hydra:member'];
+   
     const cookies = parseCookies(ctx)
     const jwt = cookies.jwtToken;
     if (typeof jwt === "undefined") {
         ctx.res.statusCode = 302;
         ctx.res.setHeader("Location", "/registratie");
     }
-    return {props: {}};
+    return { props: {data}};
 }
   
 export default Reserveren
+
