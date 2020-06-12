@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import logoTitleImage from '../images/logo_title.png'
-import kamerImage from '../images/kamer_mainimg.jpg'
+import logoTitleImage from '../../images/logo_title.png'
+import kamerImage from '../../images/kamer_mainimg.jpg'
 
 const KamersHead = () => (
     <Head>

@@ -1,5 +1,4 @@
-import BedanktCom from '../components/BedanktCom'
-
+import BedanktCom from '../components/reserveren/BedanktCom'
 const Bedankt = () => (
    <div>
        <BedanktCom />

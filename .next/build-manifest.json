@@ -9,6 +9,10 @@
     "static/development/_ssgManifest.js"
   ],
   "pages": {
+    "/": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
     "/_app": [
       "static/runtime/webpack.js",
       "static/css/styles.chunk.css",
@@ -23,6 +27,22 @@
       "static/runtime/polyfills.js"
     ],
     "/activiteiten": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/bedankt": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/contact": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/index": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/kamers": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],

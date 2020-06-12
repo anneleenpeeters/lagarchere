@@ -9,7 +9,7 @@ import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import ReserverenHead from '../components/reserveren/ReserverenHead.js';
 import ReserverenSeizoen from '../components/reserveren/ReserverenSeizoen.js';
-
+import Link from 'next/link'
 
 function Reserveren({data, jwt}) {
     const cookies = parseCookies;
@@ -63,7 +63,7 @@ function Reserveren({data, jwt}) {
              <div className="container">
             <Nav jwt={jwt}/>
             <div className="content">               
-             <div className="container-reserveren">
+                <div className="container-reserveren">
                     <ReserverenSeizoen />
                     <section className="section-reserveren">
                         <h1 className="heading-style-1">Reserveren</h1>
@@ -101,7 +101,7 @@ function Reserveren({data, jwt}) {
                             </div>
                         </div>
                         <div className="button-overzicht">
-                        <button className="button-style-2" onClick={handleOnSubmit}>Ga naar overzicht</button>
+                        <Link href="/bedankt"><a className="button-style-2" onClick={handleOnSubmit}>Reserveer</a></Link>
                     </div>
                     </section>
                     
