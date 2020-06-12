@@ -10,9 +10,11 @@ import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import {convertDate} from '../helpers.js'
 import { parseCookies } from 'nookies'
+import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 
 
-function Reserveren({data}) {
+function Reserveren({data, jwt}) {
     const cookies = parseCookies;
     const [kamer, setKamer] = useState('');
     const [focus, setFocus] = useState(null);
@@ -70,8 +72,9 @@ function Reserveren({data}) {
                 <meta property="og:description" content="Bij la Garchère kan je de dagelijkse hectiek even ontsnappen. Wij bieden luxe kamers midden in de pure natuur. Via deze pagina kan je reserveren voor jou verdiende vakantie." />
                 <meta property="og:image" content={mainLogoImage} />
              </Head>
-            <Layout>
-                <div className="container-reserveren">
+             <div className="container">
+            <Nav jwt={jwt}/>
+            <div className="content">                <div className="container-reserveren">
                     <section className="section-seizoen">
                         <h1 className="heading-style-1">Seizoenen en prijzen</h1>
                         <div className="seizoen-grid">
@@ -128,8 +131,10 @@ function Reserveren({data}) {
                     </section>
                     
                 </div>
-            </Layout>
-            <style jsx>{`
+                </div>
+            <Footer/>
+        </div>            
+        <style jsx>{`
 
             .selecteer-datum {
                 display: none;
@@ -268,9 +273,10 @@ export const getServerSideProps = async (ctx) => {
     if (typeof jwt === "undefined") {
         ctx.res.statusCode = 302;
         ctx.res.setHeader("Location", "/registratie");
+        return{ props: {data} }
+    } else {
+        return { props: {data, jwt} };
     }
-    return { props: {data}};
 }
   
 export default Reserveren
-

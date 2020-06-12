@@ -1,4 +1,3 @@
-import Layout from '../components/Layout'
 import mainLogoImage from '../images/main_logo.png'
 import Link from 'next/link'
 import {Form, Formik, Field, ErrorMessage, formikHelpers} from 'formik'
@@ -17,7 +16,6 @@ const HomeCom = () => {
 
     return(
     <div>
-        <Layout>
             <div className="container-main">
                 <img className="bg-image" src={homeImage} alt="La Garchère kamer"/>
                 <div className="main-block">
@@ -65,7 +63,6 @@ const HomeCom = () => {
                 </Formik>
             </div>
 
-        </Layout>
         <style jsx>{`
             .container-main {
                 height: 100vh;

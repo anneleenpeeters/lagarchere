@@ -1,12 +1,15 @@
 import Head from 'next/head'
 import logoTitleImage from '../images/logo_title.png'
 import mainLogoImage from '../images/main_logo.png'
-import Layout from "../components/Layout"
 import axios from "axios"
 
+import Nav from '../components/Nav'
+import Footer from '../components/Footer'
+import { parseCookies } from 'nookies'
 
 
-const Activiteiten = ({data}) => {
+
+const Activiteiten = ({data, jwt}) => {
     return (
         <div>
             <Head>
@@ -19,7 +22,9 @@ const Activiteiten = ({data}) => {
                 <meta property="og:description" content="Rondom het hotel la Garchère zijn er veel activiteiten te beleven. In deze steek zijn er diverse wijnroutes, kastelen en golfbanen. Op onze website vind u allerlei informatie hierover." />
                 <meta property="og:image" content={mainLogoImage} />
             </Head>
-            <Layout>
+            <div className="container">
+            <Nav jwt={jwt} />
+            <div className="content">
                 <div className="activiteit-container">
                 {data?.map(a => ( 
                     <section key={a.id}>
@@ -38,7 +43,9 @@ const Activiteiten = ({data}) => {
                     </section>
                 ))}
                 </div>
-            </Layout>
+                </div>
+            <Footer/>
+        </div>
             <style jsx>{`
             .activiteit-container {
                 height: 100%;
@@ -103,10 +110,20 @@ const Activiteiten = ({data}) => {
     )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(ctx) {
     const res = await axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/activiteits`)
     const data = res.data['hydra:member'];
-    return { props: {data}};
-};
+
+    const cookies = parseCookies(ctx)
+    const jwt = cookies.jwtToken;
+
+    if(typeof jwt === "undefined"){
+        return{ props: {data} }
+    } else {
+        return { props: {data, jwt} };
+    }
+}
+
+
   
-export default Activiteiten        
+export default Activiteiten

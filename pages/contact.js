@@ -1,11 +1,13 @@
 import Head from 'next/head'
 import logoTitleImage from '../images/logo_title.png'
 import mainImage from '../images/contact_main.jpg'
-import Layout from "../components/Layout"
 import Map from "../components/Map"
+import Nav from '../components/Nav'
+import Footer from '../components/Footer'
+import { parseCookies } from 'nookies'
 
 
-const Contact = () => {
+const Contact = (jwt) => {
     return (
         <div>
             <Head>
@@ -19,8 +21,9 @@ const Contact = () => {
                 <meta property="og:image" content={mainImage} />
                 <link href='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css' rel='stylesheet' />
             </Head>
-            <Layout>
-                <div className="contact-container">
+            <div className="container">
+            <Nav jwt={jwt}/>
+            <div className="content">                <div className="contact-container">
                     <div className="container-main">
                         <img className="bg-image" src={mainImage} alt="La Garchère"/>
                         <div className="main-block">
@@ -40,8 +43,9 @@ const Contact = () => {
                     </section>
                     <Map />
                 </div>
-            </Layout>
-            <style jsx>{`
+                </div>
+            <Footer/>
+        </div>            <style jsx>{`
                 .container-main {
                     height: 100vh;
                     margin: 0 auto;
@@ -152,5 +156,13 @@ const Contact = () => {
         </div>
     )
   }
-  
+  export const getServerSideProps = async (ctx) => {
+    const cookies = parseCookies(ctx)
+    const jwt = cookies.jwtToken;
+    if(typeof jwt === "undefined"){
+        return{ props: {} }
+    } else {
+        return { props: {jwt} };
+    }
+}
   export default Contact          

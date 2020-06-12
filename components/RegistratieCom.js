@@ -18,7 +18,6 @@ const RegistratieCom = () => {
 
     return(
         <div>
-            <Nav />
             <div className="container-registratie">
                 <section className="section-login">
                     <p className="message-login">{message}</p>

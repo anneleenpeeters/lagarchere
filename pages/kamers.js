@@ -5,8 +5,12 @@ import logoTitleImage from '../images/logo_title.png'
 import Link from "next/link"
 import kamerImage from '../images/kamer_mainimg.jpg'
 
+import Nav from '../components/Nav'
+import Footer from '../components/Footer'
+import { parseCookies } from 'nookies'
 
-function Kamer ({data}) {
+
+function Kamer ({data, jwt}) {
     console.log(data);
     return (
         <div>
@@ -20,8 +24,10 @@ function Kamer ({data}) {
                 <meta property="og:description" content="Ontspan in luxe. Laat jezelf even verwennen in de meest rustgevende en pure natuur van Bourgondië. " />
                 <meta property="og:image" content={kamerImage} />
             </Head>
-            <Layout>
-            <div className="kamer-container">
+            <div className="container">
+            <Nav jwt/>
+            <div className="content">
+               <div className="kamer-container">
             {data.map(k => ( 
                 <section>
                     <div className="kamer-section">
@@ -46,8 +52,10 @@ function Kamer ({data}) {
                 </section>
                 ))}
             </div>
-            </Layout>
-            <style jsx>{`
+            </div>
+            <Footer/>
+        </div>
+                    <style jsx>{`
             p {
                 line-height: 1.5;
             }
@@ -215,11 +223,20 @@ function Kamer ({data}) {
     )
   }
   
-export const getServerSideProps = async () => {
+
+export async function getServerSideProps(ctx) {
     const res = await axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/kamers`)
     const data = res.data['hydra:member'];
-    return { props: {data}};
-};
+
+    const cookies = parseCookies(ctx)
+    const jwt = cookies.jwtToken;
+
+    if(typeof jwt === "undefined"){
+        return{ props: {data} }
+    } else {
+        return { props: {data, jwt} };
+    }
+}
 
 
 export default Kamer
