@@ -1,61 +1,47 @@
-import Layout from "../components/Layout"
-import Head from 'next/head'
 import axios from "axios"
-import logoTitleImage from '../images/logo_title.png'
 import Link from "next/link"
-import kamerImage from '../images/kamer_mainimg.jpg'
-
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import { parseCookies } from 'nookies'
+import KamersHead from "../components/kamers/KamersHead"
 
 
 function Kamer ({data, jwt}) {
-    console.log(data);
     return (
         <div>
-            <Head>
-                <link rel="icon" href={logoTitleImage} type="image/icon type"/>
-                <title>La Garchère - Kamers</title>
-                <meta name="title" content="La Garchère - Kamers" />
-                <meta name="description" content="Ontspan in luxe. Laat jezelf even verwennen in de meest rustgevende en pure natuur van Bourgondië. " />
-                <meta property="og:type" content="website" />
-                <meta property="og:title" content="La Garchère - Kamers" />
-                <meta property="og:description" content="Ontspan in luxe. Laat jezelf even verwennen in de meest rustgevende en pure natuur van Bourgondië. " />
-                <meta property="og:image" content={kamerImage} />
-            </Head>
+            <KamersHead />
             <div className="container">
-            <Nav jwt/>
-            <div className="content">
-               <div className="kamer-container">
-            {data.map(k => ( 
-                <section>
-                    <div className="kamer-section">
-                        <div className="kamer-block-one">
-                            <h1 className="heading-style-1">{k.naam}</h1>
-                            <p className="ondertitel">{k.personen} personen, {k.oppervlakte}m2</p>
-                            <p className="omschrijving">{k.omschrijving}</p>
-                            <p>Prijs hoogseizoen: {k.prijshoogseizoen} euro/nacht</p>
-                            <p>Prijs laagseizoen: {k.prijslaagseizoen} euro/nacht</p>
-                            <h2 className="heading-style-2">Diensten</h2>
-                            {k.diensts.map(d => (  
-                            <ul>
-                                <li key={d.id}>{d.omschrijving}</li>
-                            </ul>
-                            ))}
-                        </div>
-                        <div className="kamer-block-two">
-                            <img src={`https://wdev.be/wdev_anneleen/eindwerk/images/kamer/${k.thumbnail}`} alt={k.naam}/>
-                            <Link as={`/kamers/${k.id}`} href="kamers/[id]"><a>Bekijk alle foto's</a></Link>
-                        </div>
+            <Nav jwt={jwt}/>
+                <div className="content">
+                    <div className="kamer-container">
+                        {data.map(k => ( 
+                            <section>
+                                <div className="kamer-section">
+                                    <div className="kamer-block-one">
+                                        <h1 className="heading-style-1">{k.naam}</h1>
+                                        <p className="ondertitel">{k.personen} personen, {k.oppervlakte}m2</p>
+                                        <p className="omschrijving">{k.omschrijving}</p>
+                                        <p>Prijs hoogseizoen: {k.prijshoogseizoen} euro/nacht</p>
+                                        <p>Prijs laagseizoen: {k.prijslaagseizoen} euro/nacht</p>
+                                        <h2 className="heading-style-2">Diensten</h2>
+                                        {k.diensts.map(d => (  
+                                        <ul>
+                                            <li key={d.id}>{d.omschrijving}</li>
+                                        </ul>
+                                        ))}
+                                    </div>
+                                    <div className="kamer-block-two">
+                                        <img src={`https://wdev.be/wdev_anneleen/eindwerk/images/kamer/${k.thumbnail}`} alt={k.naam}/>
+                                        <Link as={`/kamers/${k.id}`} href="kamers/[id]"><a>Bekijk alle foto's</a></Link>
+                                    </div>
+                                </div>
+                            </section>
+                        ))}
                     </div>
-                </section>
-                ))}
-            </div>
-            </div>
+                </div>
             <Footer/>
         </div>
-                    <style jsx>{`
+        <style jsx>{`
             p {
                 line-height: 1.5;
             }
@@ -218,8 +204,8 @@ function Kamer ({data, jwt}) {
                     object-fit: cover;
                   }
             }
-            `}</style>
-        </div>
+        `}</style>
+    </div>
     )
   }
   
