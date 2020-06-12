@@ -39,10 +39,9 @@ function Nav ({jwt}){
             <li><Link href="/reserveren"><a>Reserveren</a></Link></li>
         </ul>
         <ul className="nav-login menu">
-            {ingelogd ? <li><button onClick={logout}>logout</button></li> : <li><Link href="/login"><a>Login</a></Link></li> }
+            {ingelogd ? <li><button className="navitem-logout" onClick={logout}>logout</button></li> : <li className="navitem-login"><Link href="/login"><a>Login</a></Link></li> }
         </ul>
     </nav>)
  }
-
 
 export default Nav;

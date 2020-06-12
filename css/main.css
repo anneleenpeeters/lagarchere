@@ -128,7 +128,7 @@ body {
     width: 100%;
     z-index: 3;
     background-color: #EAE3D2;
-  }
+}
   
   .nav ul {
     margin: 0;
@@ -169,6 +169,30 @@ body {
   .nav .nav-logo img:hover {
     transform: scale(1.2);
 
+}
+
+.nav .nav-login .navitem-login {
+  margin-top: 35px;
+  margin-right: 20px;
+  padding: 5px 15px;
+}
+
+.nav .navitem-logout {
+  margin-top: 15px;
+  margin-right: 20px;
+  font-family: 'Abhaya Libre', serif;
+  text-transform: uppercase;
+  border: none;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+  background-color: transparent;
+  padding: 5px 15px;
+}
+
+.nav .navitem-logout:hover,
+.nav .navitem-login:hover {
+  background-color: #EAE3D2;
+  border-radius: 50px;
 }
   
 /* menu */

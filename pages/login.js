@@ -1,6 +1,5 @@
 import { parseCookies } from 'nookies'
 import Nav from '../components/Nav'
-import Footer from '../components/Footer'
 import LoginHead from '../components/login/LoginHead';
 import LoginForm from '../components/login/LoginForm';
 
@@ -18,10 +17,8 @@ function Login({jwt}) {
                 <div className="content">            
                     <LoginForm />>  
                 </div>
-            <Footer/>
+            </div>
         </div>
-       
-    </div>
     )
 }
 

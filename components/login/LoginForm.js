@@ -59,9 +59,6 @@ function LoginForm () {
                 </section>
             </div> 
             <style jsx>{`
-                .ingelogd-container {
-                    background-color: white;
-                }
                 .container-login .bg-image {
                     width: 100vw;
                     height: 91vh;
@@ -69,7 +66,6 @@ function LoginForm () {
                     position: absolute;
                     z-index: -1;
                 }
-
                 .container-section {
                     width: 100vw;
                     height: 91vh;
@@ -77,7 +73,6 @@ function LoginForm () {
                     align-items: center;
                     justify-content: center;
                 }
-
                 .section-login {
                     background-color: white;
                     width: 350px;
@@ -87,30 +82,27 @@ function LoginForm () {
                     align-items: center;
                     justify-content: flex-end;
                 }
-
                 .container-login button{
                     margin: 40px auto 20px auto;
                     width: 170px;
                 }
-
                 .container-login h1{
                     margin-bottom: 20px;
                     font-size: 2.8rem;
                 }
-
                 .container-login a {
                     font-size: 0.8rem;
                     border-bottom: 1px solid #1F1F1F;
                     margin-bottom: 50px;
                 }
-    
+
                 .container-login a:hover {
                     border-bottom: 1px solid transparent;
                 }
             
                 @media (min-width: 60em) {
                     .container-login .bg-image {
-                        margin-top: -110px;
+                        margin-top: -120px;
                         height: 100vh;
                     }
 

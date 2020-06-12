@@ -1,6 +1,6 @@
 import ReactMapGL, {Marker} from "react-map-gl"
 import {useState} from "react"
-import mapboxlogo from '../images/mapbox_logo.png'
+import mapboxlogo from '../../images/mapbox_logo.png'
 
 function Map () {
     const maptoken = "pk.eyJ1IjoiYW5uZWxlZW5wZWV0ZXJzIiwiYSI6ImNrYXd5d2QxYjAxNGgyeW5pNTJhaDdoMXEifQ.ls-zfu0zpOvHmm_xWvClfw"
