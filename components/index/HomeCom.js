@@ -1,11 +1,11 @@
-import mainLogoImage from '../images/main_logo.png'
+import mainLogoImage from '../../images/main_logo.png'
 import Link from 'next/link'
 import {Form, Formik, Field, ErrorMessage, formikHelpers} from 'formik'
 import {object, string} from 'yup';
 import axios from 'axios'
 import { useState } from 'react'
-import kamerImage from '../images/kamer_mainimg.jpg'
-import homeImage from '../images/home_main.jpg'
+import kamerImage from '../../images/kamer_mainimg.jpg'
+import homeImage from '../../images/home_main.jpg'
 
 const initialValues = {
     email: ''

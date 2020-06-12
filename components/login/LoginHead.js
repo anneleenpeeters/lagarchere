@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import logoTitleImage from '../images/logo_title.png'
-import homeImage from '../images/home_main.jpg'
+import logoTitleImage from '../../images/logo_title.png'
+import homeImage from '../../images/home_main.jpg'
 
 const LoginHead = () => (
     <Head>

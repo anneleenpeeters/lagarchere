@@ -1,10 +1,5 @@
-import Layout from "../components/Layout"
-import Head from 'next/head'
-import logoTitleImage from '../images/logo_title.png'
-import mainLogoImage from '../images/main_logo.png'
 import axios from 'axios'
 import { useState, useEffect } from "react"
-
 import { DateRangePicker} from 'react-dates';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
@@ -12,6 +7,8 @@ import {convertDate} from '../helpers.js'
 import { parseCookies } from 'nookies'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
+import ReserverenHead from '../components/reserveren/ReserverenHead.js';
+import ReserverenSeizoen from '../components/reserveren/ReserverenSeizoen.js';
 
 
 function Reserveren({data, jwt}) {
@@ -62,34 +59,12 @@ function Reserveren({data, jwt}) {
 
     return (
         <div>
-            <Head>
-                <link rel="icon" href={logoTitleImage} type="image/icon type"/>
-                <title>La Garchère - Reserveren</title>
-                <meta name="title" content="La Garchère - Reserveren" /> 
-                <meta name="description" content="Bij la Garchère kan je de dagelijkse hectiek even ontsnappen. Wij bieden luxe kamers midden in de pure natuur. Via deze pagina kan je reserveren voor jou verdiende vakantie." />
-                <meta property="og:type" content="website" />
-                <meta property="og:title" content="La Garchère - Reserveren" />
-                <meta property="og:description" content="Bij la Garchère kan je de dagelijkse hectiek even ontsnappen. Wij bieden luxe kamers midden in de pure natuur. Via deze pagina kan je reserveren voor jou verdiende vakantie." />
-                <meta property="og:image" content={mainLogoImage} />
-             </Head>
+            <ReserverenHead />
              <div className="container">
             <Nav jwt={jwt}/>
-            <div className="content">                <div className="container-reserveren">
-                    <section className="section-seizoen">
-                        <h1 className="heading-style-1">Seizoenen en prijzen</h1>
-                        <div className="seizoen-grid">
-                            <div> 
-                                <h2 className="heading-style-2">Laagseizoen</h2>
-                                <p>januari, februari, maart, april, mei, oktober, november</p>
-                                <p>In het laag seizoen kan u de genieten van de kamer, met minimaal verhuur van twee nachten. De kamer is inclusief ontbijt, zwembad en jacuzzi. </p>
-                            </div>
-                            <div>
-                                <h2 className="heading-style-2">Hoogseizoen</h2>
-                                <p>juni, juli, augustus, september, december</p>
-                                <p>In het hoog seizoen kan u de genieten van de kamer, met minimaal verhuur van vier nachten. De kamer is inclusief ontbijt, zwembad en jacuzzi. </p>
-                            </div>
-                        </div>
-                    </section>
+            <div className="content">               
+             <div className="container-reserveren">
+                    <ReserverenSeizoen />
                     <section className="section-reserveren">
                         <h1 className="heading-style-1">Reserveren</h1>
                         <h2 className="heading-style-2">Selecteer uw gewenste kamer</h2>
@@ -135,128 +110,82 @@ function Reserveren({data, jwt}) {
             <Footer/>
         </div>            
         <style jsx>{`
-
             .selecteer-datum {
                 display: none;
             }
-            .container-reserveren .section-seizoen,
             .container-reserveren .section-reserveren {
                 padding: 40px;
                 text-align: center;
             }
-            
-            .section-seizoen h1,
             .section-reserveren h1 {
                 margin: 40px 0;
             }
-
-            .section-seizoen h2,
             .section-reserveren h2 {
                 margin: 20px 0 10px 0;
             }
-
-            .section-seizoen p {
-                margin: 10px 0;
-            }
-
             .section-reserveren {
                 background-color: #EAE3D2;
             }
-
             .button-overzicht {
                 width: 100%;
                 display: flex;
                 justify-content: center;
                 margin: 50px 0;
             }
-
             .container-reserveren .button-style-2 {
                 font-family: 'Abhaya Libre', serif;
                 text-transform: uppercase;
                 padding: 10px 25px;
             }
-
             .section-reserveren img {
                 height: 380px;
                 width: 80%;
                 object-fit: cover;
             }
-
             .container-kamerkeuze {
                 margin: 30px 0;
             }
-
             .container-kamerkeuze p {
                 text-align: center;
                 font-size: 1.2rem;
                 font-weight: 300;
                 transition: all 500ms;
             }
-
             .radio-img  > input { 
                 display: none;
-              }
-              
+            }
             .radio-img  > img{
                 cursor: pointer;
                 opacity: 0.7;
                 transition: all 500ms;
             }
-              
             .radio-img  > input:checked + img { 
                 opacity: 1;
             }
-
             .radio-img  > input:checked ~ p {
                 font-weight: 600;
             } 
-
-            @media (min-width: 35em) {
-                .container-reserveren .section-seizoen{
-                    width: 500px;
-                    margin: 0 auto;
-                }
-            }
-
             @media (min-width: 45em) {
-                .container-reserveren .section-seizoen,
                 .container-reserveren .section-reserveren {
                     width: auto;
                     text-align: left;
                     padding: 40px;
                 }
-
-                .section-seizoen .seizoen-grid {
-                    display: grid;
-                    grid-template-columns: auto auto;
-                    grid-column-gap: 60px;
-                }
-
                 .grid-kamerkeuze {
                     display: grid;
                     grid-template-columns: auto auto;
                     grid-column-gap: 50px;
                 }
-
                 .section-reserveren img {
                     height: 490px;
                     justify-content: center;
                     width: 100%;
                 }
-
-                .section-reserveren label {
-                   
-                }
             }
 
             @media (min-width: 60em) {
-                .container-reserveren .section-seizoen,
                 .container-reserveren .section-reserveren {
                     padding: 60px 10%;
-                }
-
-                .section-seizoen .seizoen-grid {
-                    grid-column-gap: 15%;
                 }
             }
             `}</style>
