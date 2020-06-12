@@ -1,14 +1,13 @@
-import Head from 'next/head'
-import logoTitleImage from '../images/logo_title.png'
 import homeImage from '../images/home_main.jpg'
-import {Form, Formik, Field, ErrorMessage, formikHelpers, setIn} from 'formik'
+import {Form, Formik, Field, ErrorMessage} from 'formik'
 import {object, string} from 'yup';
 import Link from 'next/link'
 import axios from 'axios';
-import { useState, useEffect } from 'react'
-import { setCookie, parseCookies, destroyCookie } from 'nookies'
+import { useState } from 'react'
+import { setCookie, parseCookies } from 'nookies'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
+import LoginHead from '../components/login/LoginHead';
 
 const initialValues = {
     username: '',
@@ -18,26 +17,15 @@ const initialValues = {
 function Login({jwt}) {
     const [message, setMessage] = useState('');
     
-   
     return (
         <div>
-            <Head>
-                <link rel="icon" href={logoTitleImage} type="image/icon type"/>
-                <title>La Garchère - Login</title>
-                <meta name="title" content="La Garchère - Login" />
-                <meta name="description" content="Welkom terug bij la Garchère. Wil je graag nog eens graag ontspannen in luxe, maar toch dicht bij de natuur staan? Verwen je zelf!" />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://metatags.io/" />
-                <meta property="og:title" content="La Garchère - Login" />
-                <meta property="og:description" content="Welkom terug bij la Garchère. Wil je graag nog eens graag ontspannen in luxe, maar toch dicht bij de natuur staan? Verwen je zelf!" />
-                <meta property="og:image" content={homeImage} />
-            </Head>
+           <LoginHead />
             <div className="container">
-            <Nav jwt={jwt}/>
-            <div className="content">            
-            <div className="container-login">
-                <img className="bg-image" src={homeImage} alt="La Garchère kamer"/>
-                <div className="container-section">
+                <Nav jwt={jwt}/>
+                <div className="content">            
+                    <div className="container-login">
+                        <img className="bg-image" src={homeImage} alt="La Garchère kamer"/>
+                        <div className="container-section">
                             <section className="section-login">
                                 <p className="message-login">{message}</p>
                                 <h1 className="heading-style-2">Welkom!</h1>
@@ -79,13 +67,12 @@ function Login({jwt}) {
                                     </Formik>
                                 <Link href="/registratie"><a>Ik heb nog geen account</a></Link>
                             </section>
-                     
-                </div>   
-            </div>
-            </div>
+                        </div>   
+                    </div>
+                </div>
             <Footer/>
         </div>
-            <style jsx>{`
+        <style jsx>{`
                 .ingelogd-container {
                     background-color: white;
                 }
@@ -145,10 +132,8 @@ function Login({jwt}) {
                         height: 80vh;
                     }
                 }
-
-                
-            `}</style>
-        </div>
+        `}</style>
+    </div>
     )
 }
 export const getServerSideProps = async (ctx) => {
