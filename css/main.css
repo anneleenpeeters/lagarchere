@@ -242,11 +242,6 @@ body {
     top: 0;
   }
 
-  .login-icon{
-      display: none;
-  }
-  
-
   
 /* --------------------------------------------------
     FOOTER
@@ -364,26 +359,6 @@ footer {
 
   .nav .nav-logo img {
       margin: 20px 0 0 0;
-  }
-
-  .login-icon {
-      display: inherit;
-      font-size: 1.4rem;
-      transition: all 2ms ease-in;
-      margin: 15px 20px;
-      transition: all .2s ease-out;
-  }
-
-  .login-icon a {
-    width: 25px;
-  }
-
-  .login-icon:hover{
-    transform: scale(1.2);
-  }
-
-  .login-word {
-      display: none;
   }
 
   .nav-midden {

@@ -1,28 +1,13 @@
-import Head from 'next/head'
-import logoTitleImage from '../images/logo_title.png'
-import mainLogoImage from '../images/main_logo.png'
 import axios from "axios"
-
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import { parseCookies } from 'nookies'
+import ActiviteitenHead from '../components/activiteiten/ActiviteitenHead';
 
-
-
-const Activiteiten = ({data, jwt}) => {
-    return (
-        <div>
-            <Head>
-                <link rel="icon" href={logoTitleImage} type="image/icon type"/>
-                <title>La Garchère - Activiteiten</title>
-                <meta name="title" content="La Garchère - Activiteiten" />
-                <meta name="description" content="Rondom het hotel la Garchère zijn er veel activiteiten te beleven. In deze steek zijn er diverse wijnroutes, kastelen en golfbanen. Op onze website vind u allerlei informatie hierover." />
-                <meta property="og:type" content="website" />
-                <meta property="og:title" content="La Garchère - Activiteiten" />
-                <meta property="og:description" content="Rondom het hotel la Garchère zijn er veel activiteiten te beleven. In deze steek zijn er diverse wijnroutes, kastelen en golfbanen. Op onze website vind u allerlei informatie hierover." />
-                <meta property="og:image" content={mainLogoImage} />
-            </Head>
-            <div className="container">
+const Activiteiten = ({data, jwt}) => (
+    <div>
+        <ActiviteitenHead />
+        <div className="container">
             <Nav jwt={jwt} />
             <div className="content">
                 <div className="activiteit-container">
@@ -31,7 +16,7 @@ const Activiteiten = ({data, jwt}) => {
                         <h1  className="heading-style-1">{a.titel}</h1>
                         <div className="activiteit-grid">
                             {a.locaties.map(l => (  
-                            <article>
+                            <article key={l.key}>
                                 <h2 className="heading-style-2">{l.naam}</h2>
                                 <p>{l.km} km</p>
                                 <p>{l.adres}</p>
@@ -43,10 +28,10 @@ const Activiteiten = ({data, jwt}) => {
                     </section>
                 ))}
                 </div>
-                </div>
+            </div>
             <Footer/>
         </div>
-            <style jsx>{`
+        <style jsx>{`
             .activiteit-container {
                 height: 100%;
                 padding: 20px;
@@ -104,19 +89,16 @@ const Activiteiten = ({data, jwt}) => {
                     grid-column-gap: 60px;
                 }
             }
-            `}</style>
-
-        </div>
-    )
-}
+        `}</style>
+    </div>
+)
 
 export async function getServerSideProps(ctx) {
     const res = await axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/activiteits`)
     const data = res.data['hydra:member'];
-
     const cookies = parseCookies(ctx)
     const jwt = cookies.jwtToken;
-
+    
     if(typeof jwt === "undefined"){
         return{ props: {data} }
     } else {
@@ -124,6 +106,4 @@ export async function getServerSideProps(ctx) {
     }
 }
 
-
-  
 export default Activiteiten

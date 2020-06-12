@@ -39,26 +39,10 @@ function Nav ({jwt}){
             <li><Link href="/reserveren"><a>Reserveren</a></Link></li>
         </ul>
         <ul className="nav-login menu">
-            {/* {ingelogd ? (
-                <li className="login-word"><Link href="/login"><a>Login</a></Link></li>
-            ) : (
-                <li className="login-word"><button onClick={logout}>Logout</button></li>
-            )} */}
-
-            {ingelogd ? <button onClick={logout}>logout</button> : <Link href="/login"><a>Login</a></Link> }
-           <li className="login-icon"><Link href="/login"><a><FontAwesomeIcon icon={faUser}/></a></Link></li>
+            {ingelogd ? <li><button onClick={logout}>logout</button></li> : <li><Link href="/login"><a>Login</a></Link></li> }
         </ul>
     </nav>)
  }
 
-//  export const getServerSideProps = async (ctx) => {
-//     const cookies = parseCookies(ctx)
-//     const jwt = cookies.jwtToken;
-//     if(typeof jwt === "undefined"){
-//         return{ props: {} }
-//     } else {
-//         return { props: {jwt} };
-//     }
-// }
 
 export default Nav;
