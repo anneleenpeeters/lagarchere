@@ -191,7 +191,7 @@ const HomeCom = () => {
                     margin-left: 10%;
                 }
                 .container-main {
-                    top: -110px;
+                    top: -88px;
                 }
                 .bg-image {
                     width: 100%;

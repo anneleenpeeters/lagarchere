@@ -13,10 +13,8 @@ function Nav ({jwt}){
     useEffect(() => {
         if (typeof jwt !== "undefined") {
             setIngelogd(true);
-            console.log('inloggen true')
         } else {
             setIngelogd(false);
-            console.log('inloggen false')
         }
     }, [])
 

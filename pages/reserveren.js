@@ -1,40 +1,30 @@
 import axios from 'axios'
 import { useState, useEffect } from "react"
-import { DateRangePicker} from 'react-dates';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
-import {convertDate} from '../helpers.js'
 import { parseCookies } from 'nookies'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import ReserverenHead from '../components/reserveren/ReserverenHead.js';
 import ReserverenSeizoen from '../components/reserveren/ReserverenSeizoen.js';
 import Link from 'next/link'
+import DateRangePicker from "react-daterange-picker";
+import "react-daterange-picker/dist/css/react-calendar.css";
+import originalMoment from "moment";
+import { extendMoment } from "moment-range";
+const moment = extendMoment(originalMoment);
+
 
 function Reserveren({data, jwt}) {
     const cookies = parseCookies;
     const [kamer, setKamer] = useState('');
-    const [focus, setFocus] = useState(null);
-    const [dateRange, setdateRange] = useState({
-        startDate: null,
-        endDate: null
-    });
-
     const [aankomst, setAankomst] = useState(null);
     const [vertrek, setVertrek] = useState(null);
-
-    const { startDate, endDate } = dateRange;
-    const handleOnDateChange = (startDate, endDate) => setdateRange(startDate, endDate);
-
-    useEffect(() => {
-        setAankomst(convertDate(dateRange.startDate));
-        setVertrek(convertDate(dateRange.endDate));
-    },[])
-    
+    const today = moment();
+    const [value, setValue] = useState(moment.range(today.clone(), today.clone()))
 
     function gewensteKamer(e){
         setKamer('/wdev_anneleen/eindwerk/api/kamers/' + e.target.value);
-
         if(kamer === ''){
             document.querySelector('.selecteer-datum').style.display ='inherit';
         }
@@ -57,12 +47,39 @@ function Reserveren({data, jwt}) {
         });
     }
 
+    const onSelect = (value, states) => {
+        setValue( value, states );
+        setAankomst(value.start.format('DD-MM-YYYY'))
+        setVertrek(value.end.format('DD-MM-YYYY'))
+    };
+    
+
+  const stateDefinitions = {
+    available: {
+      color: null,
+      label: 'Beschikbaar',
+    },
+    unavailable: {
+      selectable: false,
+      color: '#78818b',
+      label: 'Gereserveerd',
+    },
+  };
+  
+  const dateRanges = [
+    {
+      state: 'unavailable',
+      range: moment.range(new Date(2020, 6, 20), new Date(2020, 6, 23)),
+    },
+  ];
+    
+
     return (
         <div>
             <ReserverenHead />
              <div className="container">
             <Nav jwt={jwt}/>
-            <div className="content">               
+            <div className="content">     
                 <div className="container-reserveren">
                     <ReserverenSeizoen />
                     <section className="section-reserveren">
@@ -83,21 +100,20 @@ function Reserveren({data, jwt}) {
                             <h2 className="heading-style-2">Selecteer uw datum</h2>
                             <div className="data-wrapper">
                             <DateRangePicker
-                                startDatePlaceholderText="Aankomst"
-                                startDate={startDate}
-                                onDatesChange={handleOnDateChange}
-                                endDatePlaceholderText="Vertrek"
-                                endDate={endDate}
-                                numberOfMonths={2}
-                                displayFormat="D MMM YYYY"
-                                showClearDates={true}
-                                focusedInput={focus}
-                                onFocusChange={focus => setFocus(focus)}
-                                startDateId="startDateMookh"
-                                endDateId="endDateMookh"
-                                minimumNights={0}
-                                firstDayOfWeek={1}
-                            />
+                                value={value}
+                                onSelect={onSelect}
+                                singleDateRange={true}
+                                numberOfCalendars={2}
+                                selectionType='range'
+                                minimumDate={new Date()}
+                                showLegend={true}
+                                stateDefinitions={stateDefinitions}
+                                dateStates={dateRanges}
+                                defaultState="available"
+                                locale={moment().locale('nl')}
+                                firstOfWeek={1}
+                                />
+
                             </div>
                         </div>
                         <div className="button-overzicht">

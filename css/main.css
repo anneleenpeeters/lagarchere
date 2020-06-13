@@ -270,7 +270,7 @@ body {
 /* --------------------------------------------------
     FOOTER
 ----------------------------------------------------- */
-.container{ 
+.container { 
   display:flex; 
   flex-direction:column; 
   justify-content: space-between;
@@ -501,80 +501,3 @@ footer {
 /* --------------------------------------------------
     RESERVEREN DATA RANGE PICKER
 ----------------------------------------------------- */
-
-.data-wrapper .DateRangePickerInput__withBorder{
-  border: none;
-  border-radius: inherit;
-}
-
-.data-wrapper .DateRangePickerInput{
-  background-color: transparent;
-}
-
-.data-wrapper .DateInput {
-  width: auto;
-  background: transparent;
-}
-
-.data-wrapper .DateInput_1 {
-  margin-right: 55px;
-  margin-top: 20px;
-}
-
-.data-wrapper .DateInput_input__focused {
-  border-bottom: none;
-  border: 1px solid black;
-}
-
-.data-wrapper .DateInput_input {
-  color: #1F1F1F;
-  border-radius: 50px;
-  font-family: 'Hind', sans-serif;
-  font-size: 1rem;
-  padding: 10px 20px 6px 20px;
-}
-
-.data-wrapper .DateRangePickerInput_clearDates_svg  {
-  margin-top: 20px;
-  fill: black;
-}
-
-.data-wrapper .DateRangePickerInput_clearDates:hover {
-  background-color: transparent;
-}
-
-.data-wrapper .DateRangePickerInput_arrow {
-  display: none;
-}
-
-.data-wrapper .DayPickerKeyboardShortcuts_show__bottomRight,
-.data-wrapper .DateInput_fang {
-  display: none;
-}
-
-.data-wrapper .CalendarDay__selected,
-.data-wrapper .CalendarDay__selected:hover,
-.data-wrapper .CalendarDay__selected_span:hover {
-  background: #264F47;
-  border: 1px double #264F47 ;
-}
-
-.data-wrapper .CalendarDay__selected_span,
-.data-wrapper .CalendarDay__hovered_span,
-.data-wrapper .CalendarDay__hovered_span:hover {
-  background: #96b3ad;
-  border:  1px double #96b3ad;
-  color: #1F1F1F;
-  
-}
-
-.data-wrapper .CalendarMonth_caption {
-  font-family: 'Abhaya Libre', serif;
-  font-size: 1.2rem;
-}
-
-.data-wrapper .DayPickerNavigation_button__default,
-.data-wrapper .DayPickerNavigation_button__default:hover,
-.data-wrapper .DayPickerNavigation_button__default:active  {
-  border: none;
-}

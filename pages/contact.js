@@ -126,7 +126,7 @@ const Contact = (jwt) => {
 
             @media (min-width: 60em) {
                 .container-main {
-                    top: -110px;
+                    top: -88px;
                 }
                 .bg-image {
                     height: auto;
