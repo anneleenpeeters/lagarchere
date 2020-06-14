@@ -1,7 +1,5 @@
 import axios from 'axios'
 import { useState, useEffect } from "react"
-import 'react-dates/initialize';
-import 'react-dates/lib/css/_datepicker.css';
 import { parseCookies } from 'nookies'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
@@ -56,21 +54,25 @@ function Reserveren({data, jwt}) {
 
   const stateDefinitions = {
     available: {
-      color: null,
+      color: 'transparent',
       label: 'Beschikbaar',
     },
     unavailable: {
       selectable: false,
-      color: '#78818b',
-      label: 'Gereserveerd',
-    },
+      color: '#595959',
+      label: 'Volzet',
+    }
   };
   
   const dateRanges = [
     {
       state: 'unavailable',
-      range: moment.range(new Date(2020, 6, 20), new Date(2020, 6, 23)),
+      range: moment.range(new Date(2020, 6, 20), new Date(2020, 6, 23))
     },
+    {
+        state: 'unavailable',
+        range: moment.range(new Date(2020, 7, 1), new Date(2020, 7, 7))
+      },
   ];
     
 
@@ -113,7 +115,11 @@ function Reserveren({data, jwt}) {
                                 locale={moment().locale('nl')}
                                 firstOfWeek={1}
                                 />
-
+                                <div className="geselecteerde-datum">
+                                <p>Aankomst datum: <span>{aankomst}</span></p>
+                                <p>Vertrek datum: <span>{vertrek}</span></p>
+                                </div>
+                                
                             </div>
                         </div>
                         <div className="button-overzicht">
