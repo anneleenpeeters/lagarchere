@@ -334,6 +334,22 @@ footer {
 /* --------------------------------------------------
     QUERIES
 ----------------------------------------------------- */
+@media (min-width: 45em) {
+  .data-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .data-wrapper .DateRangePicker{
+    margin: 0 auto;
+    display: inline-block;
+  }
+
+  .data-wrapper .DateRangePicker__Month {
+    padding: 0 20px;
+  }
+}
+
 @media (min-width: 52em) {
   footer {
     display: flex;
@@ -358,7 +374,11 @@ footer {
     flex-direction: row;
     justify-content: center;
   }
+  .data-wrapper .DateRangePicker__Month {
+    padding: 0 30px;
+  }
 }
+
 
 @media (min-width: 60em) {
   .nav {
@@ -438,6 +458,10 @@ footer {
 
   .footer-midden div{
     margin: 0 40px;
+  }
+
+  .data-wrapper .DateRangePicker__Month {
+    padding: 0 40px;
   }
 }
 
@@ -543,6 +567,10 @@ footer {
   display: none;
 }
 
+.geselecteerde-datum {
+  margin-top: 20px;
+}
+
 .geselecteerde-datum p {
   font-family: 'Abhaya Libre', serif;
   font-weight: 400;
@@ -556,4 +584,23 @@ footer {
   text-transform: uppercase;
   font-weight: 300;
   font-size: 1rem;
+}
+
+
+.data-wrapper .DateRangePicker__CalendarHighlight--single {
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: white;
+}
+
+
+.data-wrapper .DateRangePicker__Date--is-highlighted {
+  border: none !important;
+  background-color: #264F47;
+  color: white;
+}
+
+.data-wrapper .DateRangePicker__Legend {
+  text-align: center;
+  margin-top: 30px;
 }
