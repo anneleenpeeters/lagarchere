@@ -15,67 +15,91 @@ const moment = extendMoment(originalMoment);
 
 function Reserveren({data, jwt}) {
     const cookies = parseCookies;
-    const [kamer, setKamer] = useState('');
-    const [aankomst, setAankomst] = useState(null);
-    const [vertrek, setVertrek] = useState(null);
+    const [kamer, setKamer] = useState();
+    const [aankomstt, setAankomstt] = useState(null);
+    const [vertrekk, setVertrekk] = useState(null);
     const today = moment();
     const [value, setValue] = useState(moment.range(today.clone(), today.clone()))
+    const [dateRanges, setDateRanges] = useState([])
 
+    //wanneer er een kamer wordt geselecteerd
     function gewensteKamer(e){
-        setKamer('/wdev_anneleen/eindwerk/api/kamers/' + e.target.value);
-        if(kamer === ''){
+        setDateRanges([])
+        setKamer(e.target.value); 
+
+        if(kamer !== undefined){
             document.querySelector('.selecteer-datum').style.display ='inherit';
         }
+
     }
 
+    useEffect(() => {
+        setDateRanges([])
+        axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/reservaties?kamer=${kamer}`)
+        .then(response => {
+            response.data['hydra:member'].forEach(item => {
+                const convertVertrek = moment(item.vertrek).format('YYYY, M, D')
+                const convertAankomst =  moment(item.aankomst).format('YYYY, M, D')
+                setDateRanges(dateRanges => [...dateRanges, {
+                    state: 'unavailable',
+                    range: moment.range(new Date(convertAankomst), new Date(convertVertrek))
+                    }, 
+                ])
+            })
+            dateRanges.sort((a, b) => moment(a.range.start).isBefore(moment(b.range.start)) ? -1 : 1)
+        })
+    }, [kamer])
+
+
+
+        
+
+
+    //date range picker
+    const stateDefinitions = {
+        available: {
+        color: 'transparent',
+        label: 'Beschikbaar',
+        },
+        unavailable: {
+        selectable: false,
+        color: '#595959',
+        label: 'Volzet',
+        }
+    };
+
+
+ 
+
+     //wanneer er een datum wordt geselecteerd
+     const onSelect = (value, states) => {
+        setValue( value, states );
+        setAankomstt(value.start.format('DD-MM-YYYY'))
+        setVertrekk(value.end.format('DD-MM-YYYY'))
+    };
+
+
+    //formulier verzenden
     function handleOnSubmit(){
         console.log('submit');
-        axios.post("https://wdev.be/wdev_anneleen/eindwerk/api/reservaties", {
-            "aankomst": aankomst,
-            "vertrek": vertrek,
+        axios.post(`https://wdev.be/wdev_anneleen/eindwerk/api/reservaties`, {
+            "aankomst": aankomstt,
+            "vertrek": vertrekk,
             "kamer": kamer,
             "goedgekeurd": false,
             "user": "/wdev_anneleen/eindwerk/api/users/4"
           })
           .then(function (response) {
-            console.log('test');
           })
           .catch(function (error) {
             console.log(error);
         });
     }
 
-    const onSelect = (value, states) => {
-        setValue( value, states );
-        setAankomst(value.start.format('DD-MM-YYYY'))
-        setVertrek(value.end.format('DD-MM-YYYY'))
-    };
-    
+   
 
-  const stateDefinitions = {
-    available: {
-      color: 'transparent',
-      label: 'Beschikbaar',
-    },
-    unavailable: {
-      selectable: false,
-      color: '#595959',
-      label: 'Volzet',
-    }
-  };
-  
-  const dateRanges = [
-    {
-      state: 'unavailable',
-      range: moment.range(new Date(2020, 6, 20), new Date(2020, 6, 23))
-    },
-    {
-        state: 'unavailable',
-        range: moment.range(new Date(2020, 7, 1), new Date(2020, 7, 7))
-      },
-  ];
+   
     
-
     return (
         <div>
             <ReserverenHead />
@@ -91,7 +115,7 @@ function Reserveren({data, jwt}) {
                             {data?.map(k => ( 
                                 <div key={k.id} className="container-kamerkeuze">
                                     <label htmlFor={k.naam} className="radio-img">
-                                        <input type="radio" id={k.naam} name="kamerkeuze" value={k.id} onChange={gewensteKamer} />
+                                        <input type="radio" id={k.naam} name="kamerkeuze" value={k.id} onClick={gewensteKamer} />
                                         <img src={`https://wdev.be/wdev_anneleen/eindwerk/images/kamer/${k.thumbnail}`} alt={k.naam} />
                                         <p>Kamer {k.naam}</p>
                                     </label>
@@ -116,8 +140,8 @@ function Reserveren({data, jwt}) {
                                 firstOfWeek={1}
                                 />
                                 <div className="geselecteerde-datum">
-                                <p>Aankomst datum: <span>{aankomst}</span></p>
-                                <p>Vertrek datum: <span>{vertrek}</span></p>
+                                <p>Aankomst datum: <span>{aankomstt}</span></p>
+                                <p>Vertrek datum: <span>{vertrekk}</span></p>
                                 </div>
                                 
                             </div>
@@ -221,6 +245,7 @@ export const getServerSideProps = async (ctx) => {
    
     const cookies = parseCookies(ctx)
     const jwt = cookies.jwtToken;
+
     if (typeof jwt === "undefined") {
         ctx.res.statusCode = 302;
         ctx.res.setHeader("Location", "/registratie");
@@ -231,3 +256,5 @@ export const getServerSideProps = async (ctx) => {
 }
   
 export default Reserveren
+
+
