@@ -1,7 +1,7 @@
 import HomeCom from '../components/index/HomeCom'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
-import { parseCookies } from 'nookies'
+import {getJwt} from '../helpers/login'
 import HomeHead from '../components/index/HomeHead'
 
 export default function Home({jwt}) {
@@ -20,8 +20,8 @@ export default function Home({jwt}) {
 }
 
 export const getServerSideProps = async (ctx) => {
-  const cookies = parseCookies(ctx)
-  const jwt = cookies.jwtToken;
+  
+  const jwt = getJwt(ctx)
   if(typeof jwt === "undefined"){
       return{ props: {} }
   } else {

@@ -2,11 +2,10 @@ import mainImage from '../images/contact_main.jpg'
 import Map from "../components/contact/Map"
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
-import { parseCookies } from 'nookies'
 import ContactHead from '../components/contact/ContactHead'
+import {getJwt} from '../helpers/login'
 
-
-const Contact = (jwt) => {
+const Contact = ({jwt}) => {
     return (
         <div>
             <ContactHead />
@@ -147,8 +146,8 @@ const Contact = (jwt) => {
     )
   }
 export const getServerSideProps = async (ctx) => {
-    const cookies = parseCookies(ctx)
-    const jwt = cookies.jwtToken;
+    
+    const jwt = getJwt(ctx)
     if(typeof jwt === "undefined"){
         return{ props: {} }
     } else {

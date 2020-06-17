@@ -1,11 +1,7 @@
 import Link from 'next/link'
 import logoImage from '../images/logo.png'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react'
-import { parseCookies, destroyCookie } from 'nookies'
-import Router from "next/router";
-
+import {logout} from '../helpers/login'
 
 function Nav ({jwt}){
     const [ingelogd, setIngelogd] = useState('');
@@ -17,11 +13,6 @@ function Nav ({jwt}){
             setIngelogd(false);
         }
     }, [])
-
-    function logout()  {
-        destroyCookie(null, "jwtToken");
-        Router.push("/login");
-    }
 
     return(
     <nav className="nav stroke">

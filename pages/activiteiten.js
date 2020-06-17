@@ -1,8 +1,8 @@
 import axios from "axios"
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
-import { parseCookies } from 'nookies'
 import ActiviteitenHead from '../components/activiteiten/ActiviteitenHead';
+import {getJwt} from '../helpers/login'
 
 const Activiteiten = ({data, jwt}) => (
     <div>
@@ -96,9 +96,8 @@ const Activiteiten = ({data, jwt}) => (
 export async function getServerSideProps(ctx) {
     const res = await axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/activiteits`)
     const data = res.data['hydra:member'];
-    const cookies = parseCookies(ctx)
-    const jwt = cookies.jwtToken;
     
+    const jwt = getJwt(ctx)
     if(typeof jwt === "undefined"){
         return{ props: {data} }
     } else {

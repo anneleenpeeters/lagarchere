@@ -1,38 +1,50 @@
 import axios from 'axios'
 import { useState, useEffect } from "react"
-import { parseCookies } from 'nookies'
+import {getJwt} from '../helpers/login'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import ReserverenHead from '../components/reserveren/ReserverenHead.js';
 import ReserverenSeizoen from '../components/reserveren/ReserverenSeizoen.js';
-import Link from 'next/link'
 import DateRangePicker from "react-daterange-picker";
 import "react-daterange-picker/dist/css/react-calendar.css";
 import originalMoment from "moment";
 import { extendMoment } from "moment-range";
 const moment = extendMoment(originalMoment);
+import {stateDefinitions } from '../helpers/reserveren'
 
 
 function Reserveren({data, jwt}) {
-    const cookies = parseCookies;
     const [kamer, setKamer] = useState();
     const [aankomstt, setAankomstt] = useState(null);
     const [vertrekk, setVertrekk] = useState(null);
     const today = moment();
     const [value, setValue] = useState(moment.range(today.clone(), today.clone()))
     const [dateRanges, setDateRanges] = useState([])
+    const [message, setMessage] = useState();
+    const [user, setUser] = useState()
 
     //wanneer er een kamer wordt geselecteerd
     function gewensteKamer(e){
         setDateRanges([])
-        setKamer(e.target.value); 
+        setKamer('/wdev_anneleen/eindwerk/api/kamers/' + e.target.value); 
 
-        if(kamer !== undefined){
+        if(kamer){
             document.querySelector('.selecteer-datum').style.display ='inherit';
         }
-
     }
 
+    useEffect(() => {
+        if (!jwt) { return; }
+        const base64Url = jwt.split('.')[1];
+        const base64 = base64Url.replace('-', '+').replace('_', '/');
+        const userInfo = JSON.parse(window.atob(base64));
+        const userEmail = userInfo.username
+        axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/users?email=${userEmail}`)
+        .then(response => {
+            setUser('/wdev_anneleen/eindwerk/api/users/' + response.data['hydra:member'][0].id)
+        })
+    },[user])
+ 
     useEffect(() => {
         setDateRanges([])
         axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/reservaties?kamer=${kamer}`)
@@ -46,38 +58,15 @@ function Reserveren({data, jwt}) {
                     }, 
                 ])
             })
-            dateRanges.sort((a, b) => moment(a.range.start).isBefore(moment(b.range.start)) ? -1 : 1)
+            setDateRanges(dateRanges => dateRanges.sort((a, b) => moment(a.range.start).isBefore(moment(b.range.start)) ? -1 : 1))
         })
     }, [kamer])
 
-
-
-        
-
-
-    //date range picker
-    const stateDefinitions = {
-        available: {
-        color: 'transparent',
-        label: 'Beschikbaar',
-        },
-        unavailable: {
-        selectable: false,
-        color: '#595959',
-        label: 'Volzet',
-        }
-    };
-
-
- 
-
-     //wanneer er een datum wordt geselecteerd
-     const onSelect = (value, states) => {
+    const onSelect = (value, states) => {
         setValue( value, states );
         setAankomstt(value.start.format('DD-MM-YYYY'))
         setVertrekk(value.end.format('DD-MM-YYYY'))
     };
-
 
     //formulier verzenden
     function handleOnSubmit(){
@@ -87,19 +76,19 @@ function Reserveren({data, jwt}) {
             "vertrek": vertrekk,
             "kamer": kamer,
             "goedgekeurd": false,
-            "user": "/wdev_anneleen/eindwerk/api/users/4"
+            "user": user
           })
           .then(function (response) {
+            setMessage('Uw reservatie is verzonden!')
+            window.location = "/bedankt"
+
           })
           .catch(function (error) {
             console.log(error);
+            setMessage('Sorry! Er liep iets fout. Je hebt geen reservering gemaakt!')
         });
     }
 
-   
-
-   
-    
     return (
         <div>
             <ReserverenHead />
@@ -140,14 +129,16 @@ function Reserveren({data, jwt}) {
                                 firstOfWeek={1}
                                 />
                                 <div className="geselecteerde-datum">
-                                <p>Aankomst datum: <span>{aankomstt}</span></p>
-                                <p>Vertrek datum: <span>{vertrekk}</span></p>
+                                    <p>Aankomst datum: <span>{aankomstt}</span></p>
+                                    <p>Vertrek datum: <span>{vertrekk}</span></p>
                                 </div>
-                                
                             </div>
                         </div>
                         <div className="button-overzicht">
-                        <Link href="/bedankt"><a className="button-style-2" onClick={handleOnSubmit}>Reserveer</a></Link>
+                            <div>{message}</div>
+                            <div>
+                                <a className="button-style-2" onClick={handleOnSubmit}>Reserveer</a>
+                            </div>
                     </div>
                     </section>
                     
@@ -243,9 +234,7 @@ export const getServerSideProps = async (ctx) => {
     const res = await axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/kamers`)
     const data = res.data['hydra:member'];
    
-    const cookies = parseCookies(ctx)
-    const jwt = cookies.jwtToken;
-
+    const jwt = getJwt(ctx)
     if (typeof jwt === "undefined") {
         ctx.res.statusCode = 302;
         ctx.res.setHeader("Location", "/registratie");

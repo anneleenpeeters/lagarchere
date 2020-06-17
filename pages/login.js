@@ -1,12 +1,8 @@
-import { parseCookies } from 'nookies'
+import {getJwt} from '../helpers/login'
 import Nav from '../components/Nav'
 import LoginHead from '../components/login/LoginHead';
 import LoginForm from '../components/login/LoginForm';
 
-const initialValues = {
-    username: '',
-    password: ''
-  }
 
 function Login({jwt}) {
     return (
@@ -23,8 +19,7 @@ function Login({jwt}) {
 }
 
 export const getServerSideProps = async (ctx) => {
-    const cookies = parseCookies(ctx)
-    const jwt = cookies.jwtToken;
+    const jwt = getJwt(ctx)
     if(typeof jwt === "undefined"){
         return{ props: {} }
     } else {

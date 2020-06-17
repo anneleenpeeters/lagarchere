@@ -2,7 +2,7 @@ import axios from "axios"
 import Link from "next/link"
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
-import { parseCookies } from 'nookies'
+import {getJwt} from '../helpers/login'
 import KamersHead from "../components/kamers/KamersHead"
 
 
@@ -214,9 +214,7 @@ export async function getServerSideProps(ctx) {
     const res = await axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/kamers`)
     const data = res.data['hydra:member'];
 
-    const cookies = parseCookies(ctx)
-    const jwt = cookies.jwtToken;
-
+    const jwt = getJwt(ctx)
     if(typeof jwt === "undefined"){
         return{ props: {data} }
     } else {
