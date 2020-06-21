@@ -33,6 +33,7 @@ function Kamer({data}) {
                     letter-spacing: 1px;
                     padding 10px 20px;
                     width: 150px;
+                    margin-bottom: 100px;
                 }
                 .masonry {
                     padding: 20px;

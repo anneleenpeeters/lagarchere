@@ -4,6 +4,8 @@ import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import ContactHead from '../components/contact/ContactHead'
 import {getJwt} from '../helpers/login'
+import SectionText from '../components/contact/SectionText'
+import ContactForm from '../components/contact/ContactForm'
 
 const Contact = ({jwt}) => {
     return (
@@ -17,18 +19,10 @@ const Contact = ({jwt}) => {
                             <img className="bg-image" src={mainImage} alt="La Garchère"/>
                             <div className="main-block">
                                 <h1 className="heading-style-2">Contacteer ons</h1>
-                                <form> 
-                                    <input type="text" placeholder="Voornaam"/>
-                                    <input type="text" placeholder="Achternaam"/>
-                                    <input type="email" placeholder="Email"/>
-                                    <textarea placeholder="Bericht"></textarea>
-                                    <button className="button-style-3">Verzenden</button>
-                                </form>
+                                <ContactForm />
                             </div>
                         </div>
-                        <section>
-                            <p className="p-chic">Vestibulum eget velit aliquam velit venenatis ornare. Nullam dapibus tellus eu orci volutpat varius sed efficitur massa. Curabitur maximus erat nec nisi varius blandit. Duis eleifend leo felis, nec elementum purus dignissim at. Mauris mauris leo, molestie vitae sem quis, sodales semper nibh. Fusce ut nibh ac ante hendrerit lobortis in sed nibh. Aliquam vestibulum vitae arcu sed mollis. Mauris posuere ante ante.</p>
-                        </section>
+                        <SectionText />
                         <Map />
                     </div>
                 </div>
@@ -60,31 +54,9 @@ const Contact = ({jwt}) => {
                 text-align: center;
                 top: 110px;
             }
-            form {
-                display: flex;
-                flex-direction: column;
-                margin-top: 40px;
+            .heading-style-2{
+                margin-top: 20px;
             }
-            input, textarea {
-                background-color: transparent;
-                padding: 10px 20px;
-                margin: 10px 0;
-                border: none;
-                border-bottom: 1px solid #1F1F1F;
-                font-family: 'Hind', sans-serif;
-            }
-            textarea {
-                min-height: 80px;
-            }
-            button {
-                width: 60%;
-                margin: 20px auto 0 auto;
-            }
-            section {
-                padding: 50px 70px 100px 70px;
-                text-align: center;
-            }
-
             @media (min-width: 30em) {        
                 .main-block {
                     margin: 10%;
@@ -109,9 +81,6 @@ const Contact = ({jwt}) => {
                 .main-block {
                     margin-left: 50%;
                 }
-                section {
-                    padding: 5% 20% 10% 20%;
-                }
             }
 
             @media (min-width: 55em){
@@ -125,7 +94,7 @@ const Contact = ({jwt}) => {
 
             @media (min-width: 60em) {
                 .container-main {
-                    top: -88px;
+                    top: -91px;
                 }
                 .bg-image {
                     height: auto;
@@ -136,9 +105,6 @@ const Contact = ({jwt}) => {
                 }
                 .main-block {
                     margin-top: 180px;
-                }
-                section {
-                    padding: 5% 25% 10% ;
                 }
             }
         `}</style>

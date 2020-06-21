@@ -27,10 +27,6 @@ function Reserveren({data, jwt}) {
     function gewensteKamer(e){
         setDateRanges([])
         setKamer('/wdev_anneleen/eindwerk/api/kamers/' + e.target.value); 
-
-        if(kamer){
-            document.querySelector('.selecteer-datum').style.display ='inherit';
-        }
     }
 
     useEffect(() => {
@@ -46,6 +42,9 @@ function Reserveren({data, jwt}) {
     },[user])
  
     useEffect(() => {
+        if(kamer){
+            document.querySelector('.selecteer-datum').style.display ='inherit';
+        }
         setDateRanges([])
         axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/reservaties?kamer=${kamer}`)
         .then(response => {
@@ -61,6 +60,8 @@ function Reserveren({data, jwt}) {
             setDateRanges(dateRanges => dateRanges.sort((a, b) => moment(a.range.start).isBefore(moment(b.range.start)) ? -1 : 1))
         })
     }, [kamer])
+
+
 
     const onSelect = (value, states) => {
         setValue( value, states );
@@ -127,7 +128,7 @@ function Reserveren({data, jwt}) {
                                 defaultState="available"
                                 locale={moment().locale('nl')}
                                 firstOfWeek={1}
-                                />
+                            />
                                 <div className="geselecteerde-datum">
                                     <p>Aankomst datum: <span>{aankomstt}</span></p>
                                     <p>Vertrek datum: <span>{vertrekk}</span></p>
