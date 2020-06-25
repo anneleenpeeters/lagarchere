@@ -27,7 +27,6 @@ const ContactForm = () => {
                 }
                 initialValues={initialValues} 
                 onSubmit={(values, formikHelpers)=> {
-                    console.log(values)
                     axios.post("https://wdev.be/wdev_anneleen/eindwerk/api/contacts", values)
                         .then(function (response) {
                             setMessage("Jouw vraag is verzonden!");
@@ -39,19 +38,14 @@ const ContactForm = () => {
                 {({values, errors, isSubmitting}) => (
                     <Form className="form-contact">
                         <p>{message}</p>
-
                         <Field name="voornaam" type="text" placeholder="voornaam" className="inputtype-style-2"></Field>
                         <div><ErrorMessage name="voornaam"></ErrorMessage></div>
-                                    
                         <Field name="achternaam" type="tex" placeholder="achternaam" className="inputtype-style-2"></Field>
                         <div><ErrorMessage name="achternaam"></ErrorMessage></div>
-                                    
                         <Field name="email" type="email" placeholder="email" className="inputtype-style-2"></Field>
                         <div><ErrorMessage name="email"></ErrorMessage></div>
-                                    
                         <Field name="bericht" as="textarea" placeholder="bericht" className="inputtype-style-2 bericht"></Field>
-                        <div><ErrorMessage name="beticht"></ErrorMessage></div>
-                                    
+                        <div><ErrorMessage name="beticht"></ErrorMessage></div>  
                         <button type="submit" className="button-style-1" disabled={isSubmitting}>Verzenden</button>
                     </Form>
                 )}

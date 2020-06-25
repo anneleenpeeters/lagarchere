@@ -14,21 +14,16 @@ import {stateDefinitions } from '../helpers/reserveren'
 
 
 function Reserveren({data, jwt}) {
+    const today = moment();
     const [kamer, setKamer] = useState();
     const [aankomstt, setAankomstt] = useState(null);
     const [vertrekk, setVertrekk] = useState(null);
-    const today = moment();
     const [value, setValue] = useState(moment.range(today.clone(), today.clone()))
     const [dateRanges, setDateRanges] = useState([])
     const [message, setMessage] = useState();
     const [user, setUser] = useState()
 
-    //wanneer er een kamer wordt geselecteerd
-    function gewensteKamer(e){
-        setDateRanges([])
-        setKamer('/wdev_anneleen/eindwerk/api/kamers/' + e.target.value); 
-    }
-
+    //USER
     useEffect(() => {
         if (!jwt) { return; }
         const base64Url = jwt.split('.')[1];
@@ -40,6 +35,12 @@ function Reserveren({data, jwt}) {
             setUser('/wdev_anneleen/eindwerk/api/users/' + response.data['hydra:member'][0].id)
         })
     },[user])
+
+    //KAMER
+    function gewensteKamer(e){
+        setDateRanges([])
+        setKamer('/wdev_anneleen/eindwerk/api/kamers/' + e.target.value); 
+    }
  
     useEffect(() => {
         if(kamer){
@@ -61,17 +62,15 @@ function Reserveren({data, jwt}) {
         })
     }, [kamer])
 
-
-
+    //DATUMS
     const onSelect = (value, states) => {
         setValue( value, states );
         setAankomstt(value.start.format('DD-MM-YYYY'))
         setVertrekk(value.end.format('DD-MM-YYYY'))
     };
 
-    //formulier verzenden
+    //SUBMIT
     function handleOnSubmit(){
-        console.log('submit');
         axios.post(`https://wdev.be/wdev_anneleen/eindwerk/api/reservaties`, {
             "aankomst": aankomstt,
             "vertrek": vertrekk,
@@ -82,10 +81,8 @@ function Reserveren({data, jwt}) {
           .then(function (response) {
             setMessage('Uw reservatie is verzonden!')
             window.location = "/bedankt"
-
           })
           .catch(function (error) {
-            console.log(error);
             setMessage('Sorry! Er liep iets fout. Je hebt geen reservering gemaakt!')
         });
     }
@@ -93,77 +90,68 @@ function Reserveren({data, jwt}) {
     return (
         <div>
             <ReserverenHead />
-             <div className="container">
-            <Nav jwt={jwt}/>
-            <div className="content">     
-                <div className="container-reserveren">
-                    <ReserverenSeizoen />
-                    <section className="section-reserveren">
-                        <h1 className="heading-style-1">Reserveren</h1>
-                        <h2 className="heading-style-2">Selecteer uw gewenste kamer</h2>
-                        <div className="grid-kamerkeuze">
-                            {data?.map(k => ( 
-                                <div key={k.id} className="container-kamerkeuze">
-                                    <label htmlFor={k.naam} className="radio-img">
-                                        <input type="radio" id={k.naam} name="kamerkeuze" value={k.id} onClick={gewensteKamer} />
-                                        <img src={`https://wdev.be/wdev_anneleen/eindwerk/images/kamer/${k.thumbnail}`} alt={k.naam} />
-                                        <p>Kamer {k.naam}</p>
-                                    </label>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="selecteer-datum">
-                            <h2 className="heading-style-2">Selecteer uw datum</h2>
-                            <div className="data-wrapper">
-                            <DateRangePicker
-                                value={value}
-                                onSelect={onSelect}
-                                singleDateRange={true}
-                                numberOfCalendars={2}
-                                selectionType='range'
-                                minimumDate={new Date()}
-                                showLegend={true}
-                                stateDefinitions={stateDefinitions}
-                                dateStates={dateRanges}
-                                defaultState="available"
-                                locale={moment().locale('nl')}
-                                firstOfWeek={1}
-                            />
-                                <div className="geselecteerde-datum">
-                                    <p>Aankomst datum: <span>{aankomstt}</span></p>
-                                    <p>Vertrek datum: <span>{vertrekk}</span></p>
+            <div className="container">
+                <Nav jwt={jwt}/>
+                <div className="content">     
+                    <div className="container-reserveren">
+                        <ReserverenSeizoen />
+                        <section className="section-reserveren">
+                            <h1 className="heading-style-1">Reserveren</h1>
+                            <h2 className="heading-style-2">Selecteer uw gewenste kamer</h2>
+                            <div className="grid-kamerkeuze">
+                                {data?.map(k => ( 
+                                    <div key={k.id} className="container-kamerkeuze">
+                                        <label htmlFor={k.naam} className="radio-img">
+                                            <input type="radio" id={k.naam} name="kamerkeuze" value={k.id} onClick={gewensteKamer} />
+                                            <img src={`https://wdev.be/wdev_anneleen/eindwerk/images/kamer/${k.thumbnail}`} alt={k.naam} />
+                                            <p>Kamer {k.naam}</p>
+                                        </label>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="selecteer-datum">
+                                <h2 className="heading-style-2">Selecteer uw datum</h2>
+                                <div className="data-wrapper">
+                                    <DateRangePicker
+                                        value={value}
+                                        onSelect={onSelect}
+                                        singleDateRange={true}
+                                        numberOfCalendars={2}
+                                        selectionType='range'
+                                        minimumDate={new Date()}
+                                        showLegend={true}
+                                        stateDefinitions={stateDefinitions}
+                                        dateStates={dateRanges}
+                                        defaultState="available"
+                                        locale={moment().locale('nl')}
+                                        firstOfWeek={1}
+                                    />
+                                    <div className="geselecteerde-datum">
+                                        <p>Aankomst datum: <span>{aankomstt}</span></p>
+                                        <p>Vertrek datum: <span>{vertrekk}</span></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="button-overzicht">
-                            <div>{message}</div>
-                            <div>
-                                <a className="button-style-2" onClick={handleOnSubmit}>Reserveer</a>
+                            <div className="button-overzicht">
+                                <div>{message}</div>
+                                <div>
+                                    <a className="button-style-2" onClick={handleOnSubmit}>Reserveer</a>
+                                </div>
                             </div>
+                        </section> 
                     </div>
-                    </section>
-                    
-                </div>
                 </div>
             <Footer/>
         </div>            
         <style jsx>{`
-            .selecteer-datum {
-                display: none;
-            }
+            .selecteer-datum { display: none; }
             .container-reserveren .section-reserveren {
                 padding: 40px;
                 text-align: center;
             }
-            .section-reserveren h1 {
-                margin: 40px 0;
-            }
-            .section-reserveren h2 {
-                margin: 20px 0 10px 0;
-            }
-            .section-reserveren {
-                background-color: #EAE3D2;
-            }
+            .section-reserveren h1 { margin: 40px 0; }
+            .section-reserveren h2 { margin: 20px 0 10px 0; }
+            .section-reserveren { background-color: #EAE3D2; }
             .button-overzicht {
                 width: 100%;
                 display: flex;
@@ -180,29 +168,21 @@ function Reserveren({data, jwt}) {
                 width: 80%;
                 object-fit: cover;
             }
-            .container-kamerkeuze {
-                margin: 30px 0;
-            }
+            .container-kamerkeuze { margin: 30px 0; }
             .container-kamerkeuze p {
                 text-align: center;
                 font-size: 1.2rem;
                 font-weight: 300;
                 transition: all 500ms;
             }
-            .radio-img  > input { 
-                display: none;
-            }
+            .radio-img  > input { display: none; }
             .radio-img  > img{
                 cursor: pointer;
                 opacity: 0.7;
                 transition: all 500ms;
             }
-            .radio-img  > input:checked + img { 
-                opacity: 1;
-            }
-            .radio-img  > input:checked ~ p {
-                font-weight: 600;
-            } 
+            .radio-img  > input:checked + img { opacity: 1; }
+            .radio-img  > input:checked ~ p { font-weight: 600; } 
             @media (min-width: 45em) {
                 .container-reserveren .section-reserveren {
                     width: auto;
@@ -220,11 +200,8 @@ function Reserveren({data, jwt}) {
                     width: 100%;
                 }
             }
-
             @media (min-width: 60em) {
-                .container-reserveren .section-reserveren {
-                    padding: 60px 10%;
-                }
+                .container-reserveren .section-reserveren { padding: 60px 10%; }
             }
             `}</style>
         </div>

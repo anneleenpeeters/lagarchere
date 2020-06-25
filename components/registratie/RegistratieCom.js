@@ -93,20 +93,14 @@ const RegistratieCom = () => {
                     font-size: 0.8rem;
                     border-bottom: 1px solid #1F1F1F;
                 }
-                .container-registratie a:hover {
-                    border-bottom: none;
-                }
-
+                .container-registratie a:hover { border-bottom: none;}
                 @media (min-width: 60em) {
                     .container-registratie {
                         margin-top: -110px;
                         height: 100vh;
                     }
-                    .container-registratie h1 {
-                        margin-top: 80px;
-                    }
+                    .container-registratie h1 { margin-top: 80px;}
                 }
-                    
             `}</style>
         </div>
     )

@@ -11,6 +11,7 @@ function Map () {
         height: '600px',
         zoom: 14
     })
+
     return(
         <div>
             <ReactMapGL
@@ -28,13 +29,9 @@ function Map () {
                 </Marker>
             </ReactMapGL>
             <style jsx>{`
-                .mapbox-logo {
-                    width: 150px;
-                }
+                .mapbox-logo { width: 150px; }
             `}</style>
         </div>
-
-
     )
 }
 

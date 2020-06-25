@@ -59,33 +59,22 @@ const Subscribe = () => {
                     padding: 60px 20px;
                     text-align: center;
                 }
-                .container-subscribe p {
-                    margin: 20px 0 40px 0;
-                }
+                .container-subscribe p { margin: 20px 0 40px 0; }
                 form {
                     display: flex;
                     flex-direction: column;
                 }
-                .message-subscribe {
-                    font-weight: 600;
-                }
-
+                .message-subscribe { font-weight: 600; }
                 @media (min-width: 30em) {
-                    .container-subscribe {
-                        padding: 100px 60px;
-                    }
-                    input {
-                        width: 70%;
-                    }
+                    .container-subscribe { padding: 100px 60px; }
+                    input { width: 70%; }
                 }
-
                 @media (min-width: 40em) {
                     .container-subscribe {
                         max-width: 500px;
                         margin: 0 auto;
                     }
                 }
-
             `}</style>
         </div>
     )

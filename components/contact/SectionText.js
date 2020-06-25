@@ -8,21 +8,14 @@ const SectionText = () => (
                 padding: 50px 70px 100px 70px;
                 text-align: center;
             }
-
             @media (min-width: 50em) {        
-                section {
-                    padding: 5% 20% 10% 20%;
-                }
+                section { padding: 5% 20% 10% 20%; }
             }
-
             @media (min-width: 60em) {
-                section {
-                    padding: 5% 25% 10% ;
-                }
+                section { padding: 5% 25% 10% ; }
             }
         `}</style>
     </div>
-    
 );  
 
 export default SectionText;

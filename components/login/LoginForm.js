@@ -22,7 +22,6 @@ function LoginForm () {
                 <section className="section-login">
                     <p className="message-login">{message}</p>
                     <h1 className="heading-style-2">Welkom!</h1>
-                    
                     <Formik 
                         validationSchema={
                             object({
@@ -95,20 +94,13 @@ function LoginForm () {
                     border-bottom: 1px solid #1F1F1F;
                     margin-bottom: 50px;
                 }
-
-                .container-login a:hover {
-                    border-bottom: 1px solid transparent;
-                }
-            
+                .container-login a:hover { border-bottom: 1px solid transparent; }
                 @media (min-width: 60em) {
                     .container-login .bg-image {
                         margin-top: -120px;
                         height: 100vh;
                     }
-
-                    .container-section {
-                        height: 80vh;
-                    }
+                    .container-section { height: 80vh; }
                 }
             `}</style>
         </div>

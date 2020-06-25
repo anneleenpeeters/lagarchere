@@ -1,22 +1,18 @@
 import axios from "axios"
-import Nav from '../components/Nav'
-import Footer from '../components/Footer'
 import ActiviteitenHead from '../components/activiteiten/ActiviteitenHead';
-import {getJwt} from '../helpers/login'
+import Layout from '../components/Layout'
 
-const Activiteiten = ({data, jwt}) => (
+const Activiteiten = ({data}) => (
     <div>
         <ActiviteitenHead />
-        <div className="container">
-            <Nav jwt={jwt} />
-            <div className="content">
-                <div className="activiteit-container">
+        <Layout>
+            <div className="activiteit-container">
                 {data?.map(a => ( 
                     <section key={a.id}>
                         <h1  className="heading-style-1">{a.titel}</h1>
                         <div className="activiteit-grid">
                             {a.locaties.map(l => (  
-                            <article key={l.key}>
+                            <article key={l.id}>
                                 <h2 className="heading-style-2">{l.naam}</h2>
                                 <p>{l.km} km</p>
                                 <p>{l.adres}</p>
@@ -27,10 +23,8 @@ const Activiteiten = ({data, jwt}) => (
                         </div>
                     </section>
                 ))}
-                </div>
             </div>
-            <Footer/>
-        </div>
+        </Layout>
         <style jsx>{`
             .activiteit-container {
                 height: 100%;
@@ -48,41 +42,24 @@ const Activiteiten = ({data, jwt}) => (
                 margin-bottom: 40px;
                 max-width: 500px;
             }
-            article p:last-child {
-                margin-top: 15px;
-            }
+            article p:last-child { margin-top: 15px; }
             .activiteit-grid {
                 display: grid;
                 grid-template-columns: auto;
                 padding: 10px;
             }
-
             @media (min-width: 30em) {
-                .activiteit-container {
-                    padding: 40px;
-                }
+                .activiteit-container { padding: 40px; }
             }
-
             @media (min-width: 40em) {
-                .activiteit-container {
-                    padding: 0 80px;
-                }
-                section {
-                    margin-top: 90px;
-                }
+                .activiteit-container { padding: 0 80px; }
+                section { margin-top: 90px; }
             }
-            
             @media (min-width: 50em) {
-                .activiteit-container {
-                    padding: 0 120px;
-                }
+                .activiteit-container { padding: 0 120px; }
             }
-
             @media (min-width: 60em) {
-                .activiteit-container {
-                    padding: 0 10%;
-                }
-
+                .activiteit-container { padding: 0 10%; }
                 .activiteit-grid {
                     display: grid;
                     grid-template-columns: auto auto;
@@ -93,16 +70,10 @@ const Activiteiten = ({data, jwt}) => (
     </div>
 )
 
-export async function getServerSideProps(ctx) {
+export async function getStaticProps() {
     const res = await axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/activiteits`)
     const data = res.data['hydra:member'];
-    
-    const jwt = getJwt(ctx)
-    if(typeof jwt === "undefined"){
-        return{ props: {data} }
-    } else {
-        return { props: {data, jwt} };
-    }
+    return { props: {data} }
 }
 
 export default Activiteiten

@@ -21,15 +21,9 @@ const ReserverenSeizoen = () => (
                 padding: 40px;
                 text-align: center;
             }
-            .section-seizoen h1 {
-                margin: 40px 0;
-            }
-            .section-seizoen h2 {
-                margin: 20px 0 10px 0;
-            }
-            .section-seizoen p {
-                margin: 10px 0;
-            }
+            .section-seizoen h1 { margin: 40px 0; }
+            .section-seizoen h2 { margin: 20px 0 10px 0; }
+            .section-seizoen p { margin: 10px 0; }
             @media (min-width: 35em) {
                 .section-seizoen{
                     width: 500px;
@@ -49,12 +43,8 @@ const ReserverenSeizoen = () => (
                 }
             }
             @media (min-width: 60em) {
-                 .section-seizoen {
-                    padding: 60px 10%;
-                }
-                .section-seizoen .seizoen-grid {
-                    grid-column-gap: 15%;
-                }
+                .section-seizoen { padding: 60px 10%; }
+                .section-seizoen .seizoen-grid { grid-column-gap: 15%; }
             }
         `}</style>
     </div>

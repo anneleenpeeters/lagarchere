@@ -13,7 +13,6 @@ const ActiviteitenHead = () => (
         <meta property="og:description" content="Rondom het hotel la Garchère zijn er veel activiteiten te beleven. In deze steek zijn er diverse wijnroutes, kastelen en golfbanen. Op onze website vind u allerlei informatie hierover." />
          <meta property="og:image" content={mainLogoImage} />
     </Head>
-
 );  
 
 export default ActiviteitenHead;

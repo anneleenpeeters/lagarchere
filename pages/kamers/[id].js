@@ -62,8 +62,17 @@ function Kamer({data}) {
     )
 }
 
-export const getServerSideProps = async (ctx) => {
-    const res = await axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/kamers/${ctx.query.id}`);
+export async function getStaticPaths() {
+    const paths= [
+        { params: { id: '2' } },
+        { params: { id: '3' } }
+      ]
+
+    return { paths, fallback: false }
+  }
+
+export const getStaticProps = async ({params}) => {
+    const res = await axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/kamers/${params.id}`);
     const data = res.data;
     return { props: {data}};
 };

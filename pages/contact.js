@@ -1,33 +1,26 @@
 import mainImage from '../images/contact_main.jpg'
 import Map from "../components/contact/Map"
-import Nav from '../components/Nav'
-import Footer from '../components/Footer'
 import ContactHead from '../components/contact/ContactHead'
-import {getJwt} from '../helpers/login'
 import SectionText from '../components/contact/SectionText'
 import ContactForm from '../components/contact/ContactForm'
+import Layout from '../components/Layout'
 
-const Contact = ({jwt}) => {
-    return (
-        <div>
-            <ContactHead />
-            <div className="container">
-                <Nav jwt={jwt}/>
-                <div className="content">                
-                    <div className="contact-container">
-                        <div className="container-main">
-                            <img className="bg-image" src={mainImage} alt="La Garchère"/>
-                            <div className="main-block">
-                                <h1 className="heading-style-2">Contacteer ons</h1>
-                                <ContactForm />
-                            </div>
-                        </div>
-                        <SectionText />
-                        <Map />
+const Contact = () => (
+    <div>
+        <ContactHead />
+        <Layout>
+            <div className="contact-container">
+                <div className="container-main">
+                    <img className="bg-image" src={mainImage} alt="La Garchère"/>
+                    <div className="main-block">
+                        <h1 className="heading-style-2">Contacteer ons</h1>
+                        <ContactForm />
                     </div>
                 </div>
-            <Footer/>
-        </div>           
+                <SectionText />
+                <Map />
+            </div>            
+        </Layout>
         <style jsx>{`
             .container-main {
                 height: 100vh;
@@ -35,7 +28,7 @@ const Contact = ({jwt}) => {
                 overflow: hidden;
                 position: relative;
                 top: -65px;
-            }
+            }                
             .bg-image {
                 height: 100%;
                 left: 50%;
@@ -54,9 +47,7 @@ const Contact = ({jwt}) => {
                 text-align: center;
                 top: 110px;
             }
-            .heading-style-2{
-                margin-top: 20px;
-            }
+            .heading-style-2{ margin-top: 20px; }
             @media (min-width: 30em) {        
                 .main-block {
                     margin: 10%;
@@ -64,7 +55,6 @@ const Contact = ({jwt}) => {
                     top: 50px;
                 }
             }
-
             @media (min-width: 40em) {        
                 .main-block {
                     margin: 20%;
@@ -72,17 +62,13 @@ const Contact = ({jwt}) => {
                     top: -30px;
                 }
             }
-
             @media (min-width: 50em) {        
                 .main-block {
                     width: 320px;
                     margin-top: 140px;
                 }
-                .main-block {
-                    margin-left: 50%;
-                }
+                .main-block { margin-left: 50%; }
             }
-
             @media (min-width: 55em){
                 .bg-image {
                     min-height: 100%;
@@ -91,11 +77,8 @@ const Contact = ({jwt}) => {
                     position: absolute;
                 }
             }
-
             @media (min-width: 60em) {
-                .container-main {
-                    top: -91px;
-                }
+                .container-main { top: -91px; }
                 .bg-image {
                     height: auto;
                     left: 0;
@@ -103,21 +86,10 @@ const Contact = ({jwt}) => {
                     position: absolute;
                     width: 100%;
                 }
-                .main-block {
-                    margin-top: 180px;
-                }
+                .main-block { margin-top: 180px; }
             }
         `}</style>
     </div>
-    )
-  }
-export const getServerSideProps = async (ctx) => {
-    
-    const jwt = getJwt(ctx)
-    if(typeof jwt === "undefined"){
-        return{ props: {} }
-    } else {
-        return { props: {jwt} };
-    }
-}
-export default Contact          
+)
+
+export default Contact       
