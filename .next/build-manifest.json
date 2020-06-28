@@ -26,11 +26,7 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/kamers": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/kamers/[id]": [
+    "/contact": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

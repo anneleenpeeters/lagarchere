@@ -965,7 +965,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* WEBPACK VAR INJECTION */(f
 
 /***/ }),
 
-/***/ 8:
+/***/ 9:
 /*!***********************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Factiviteiten&absolutePagePath=%2FUsers%2FAnneleen%2FSites%2Flagarchere%2Fpages%2Factiviteiten.js ***!
   \***********************************************************************************************************************************************/
@@ -988,4 +988,4 @@ eval("module.exports = dll_5030f387d328e4415785;//# sourceURL=[module]\n//# sour
 
 /***/ })
 
-},[[8,"static/runtime/webpack.js"]]]);
+},[[9,"static/runtime/webpack.js"]]]);
