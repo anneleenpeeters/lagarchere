@@ -35,7 +35,7 @@ const RegistratieCom = () => {
                         }
                         initialValues={initialValues} 
                         onSubmit={(values, formikHelpers)=> {
-                            axios.post("https://wdev.be/wdev_anneleen/eindwerk/api/users", values)
+                            axios.post(`${process.env.API_ENDPOINT}users`, values)
                                 .then(function (response) {
                                 setMessage("Gelukt! Welkom bij la Garchère");
                                 window.location = "/"

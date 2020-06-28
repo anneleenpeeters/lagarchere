@@ -23,7 +23,7 @@ const Subscribe = () => {
                     }
                     initialValues={initialValues} 
                     onSubmit={(values, formikHelpers)=> {
-                        axios.post("https://wdev.be/wdev_anneleen/eindwerk/api/subscribes", values)
+                        axios.post(`${process.env.API_ENDPOINT}subscribes`, values)
                             .then(function (response) {
                                 setMessage("Joepie! Je ontvangt nu onze nieuwsbrieven!");
                             })

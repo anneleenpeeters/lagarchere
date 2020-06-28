@@ -1,7 +1,5 @@
 import axios from "axios"
 import Link from "next/link"
-import Nav from '../components/Nav'
-import Footer from '../components/Footer'
 import KamersHead from "../components/kamers/KamersHead"
 import Layout from "../components/Layout"
 
@@ -27,7 +25,7 @@ const Kamer = ({data}) => (
                                 ))}
                             </div>
                             <div className="kamer-block-two">
-                                <img src={`https://wdev.be/wdev_anneleen/eindwerk/images/kamer/${k.thumbnail}`} alt={k.naam}/>
+                                <img src={`${process.env.IMAGE_PATH}${k.thumbnail}`} alt={k.naam}/>
                                 <Link as={`/kamers/${k.id}`} href="kamers/[id]"><a>Bekijk alle foto's</a></Link>
                             </div>
                         </div>
@@ -148,7 +146,7 @@ const Kamer = ({data}) => (
 )
 
 export async function getStaticProps() {
-    const res = await axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/kamers`)
+    const res = await axios.get(`${process.env.API_ENDPOINT}kamers`)
     const data = res.data['hydra:member'];
     return { props: {data} }
 }

@@ -30,7 +30,7 @@ function Reserveren({data, jwt}) {
         const base64 = base64Url.replace('-', '+').replace('_', '/');
         const userInfo = JSON.parse(window.atob(base64));
         const userEmail = userInfo.username
-        axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/users?email=${userEmail}`)
+        axios.get(`${process.env.API_ENDPOINT}users?email=${userEmail}`)
         .then(response => {
             setUser('/wdev_anneleen/eindwerk/api/users/' + response.data['hydra:member'][0].id)
         })
@@ -47,7 +47,7 @@ function Reserveren({data, jwt}) {
             document.querySelector('.selecteer-datum').style.display ='inherit';
         }
         setDateRanges([])
-        axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/reservaties?kamer=${kamer}`)
+        axios.get(`${process.env.API_ENDPOINT}reservaties?kamer=${kamer}`)
         .then(response => {
             response.data['hydra:member'].forEach(item => {
                 const convertVertrek = moment(item.vertrek).format('YYYY, M, D')
@@ -71,7 +71,7 @@ function Reserveren({data, jwt}) {
 
     //SUBMIT
     function handleOnSubmit(){
-        axios.post(`https://wdev.be/wdev_anneleen/eindwerk/api/reservaties`, {
+        axios.post(`${process.env.API_ENDPOINT}reservaties`, {
             "aankomst": aankomstt,
             "vertrek": vertrekk,
             "kamer": kamer,
@@ -209,7 +209,7 @@ function Reserveren({data, jwt}) {
 }
 
 export const getServerSideProps = async (ctx) => {
-    const res = await axios.get(`https://wdev.be/wdev_anneleen/eindwerk/api/kamers`)
+    const res = await axios.get(`${process.env.API_ENDPOINT}kamers`)
     const data = res.data['hydra:member'];
    
     const jwt = getJwt(ctx)
