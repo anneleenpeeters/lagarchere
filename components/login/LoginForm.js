@@ -75,7 +75,7 @@ function LoginForm () {
                 .section-login {
                     background-color: white;
                     width: 350px;
-                    height: 60vh;
+                    height: 450px;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
