@@ -23,7 +23,7 @@ const Contact = () => (
         </Layout>
         <style jsx>{`
             .container-main {
-                height: 100vh;
+                height: 103vh;
                 margin: 0 auto;
                 overflow: hidden;
                 position: relative;
