@@ -3,7 +3,7 @@ import {useState} from "react"
 import mapboxlogo from '../../images/mapbox_logo.png'
 
 function Map () {
-    const maptoken = process.env.MAP_TOKEN
+    const maptoken = `${process.env.MAP_TOKEN}`
     const [viewport, setViewport]= useState({
         latitude: 46.86702346801758,
         longitude: 4.08235502243042,
