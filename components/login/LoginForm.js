@@ -79,7 +79,7 @@ function LoginForm () {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    justify-content: flex-end;
+                    justify-content: center;
                 }
                 .container-login button{
                     margin: 40px auto 20px auto;
@@ -88,7 +88,6 @@ function LoginForm () {
                 .container-login h1{
                     margin-bottom: 20px;
                     font-size: 2.8rem;
-                    margin-top: -30px;
                 }
                 .container-login a {
                     font-size: 0.8rem;
