@@ -49,7 +49,7 @@ function Reserveren({data, jwt}) {
             document.querySelector('.selecteer-datum').style.display ='inherit';
         }
         setDateRanges([])
-        axios.get(`${process.env.API_ENDPOINT}reservaties?kamer=${kamer}`)
+        axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}reservaties?kamer=${kamer}`)
         .then(response => {
             response.data['hydra:member'].forEach(item => {
                 const convertVertrek = moment(item.vertrek).format('YYYY, M, D')
@@ -73,7 +73,7 @@ function Reserveren({data, jwt}) {
 
     //SUBMIT
     function handleOnSubmit(){
-        axios.post(`${process.env.API_ENDPOINT}reservaties`, {
+        axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}reservaties`, {
             "aankomst": aankomstt,
             "vertrek": vertrekk,
             "kamer": kamer,
