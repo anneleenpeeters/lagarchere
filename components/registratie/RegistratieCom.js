@@ -66,12 +66,13 @@ const RegistratieCom = () => {
             <style jsx>{`
                 .container-registratie {
                     background-color: #EAE3D2;
-                    height: 91vh;
+                    height: 100vh;
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
                     text-align: center;
+                    margin-top: -200px;
                 }
                 .container-registratie button {
                     text-transform: uppercase;
