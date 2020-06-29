@@ -345,6 +345,9 @@ footer {
   .data-wrapper .DateRangePicker{
     margin: 0 auto;
     display: inline-block;
+    width: 1300px;
+    width: 400px;
+    height: 400px;
   }
 
   .data-wrapper .DateRangePicker__Month {
@@ -546,6 +549,19 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.data-wrapper .DateRangePicker{
+  width: 1300px;
+}
+
+.data-wrapper .DateRangePicker__Month {
+  width: 400px;
+  height: 400px;
+}
+
+.data-wrapper .DateRangePicker__Date {
+  height: 45px;
 }
 
 .data-wrapper .DateRangePicker__Date--weekend {
