@@ -88,6 +88,7 @@ function LoginForm () {
                 .container-login h1{
                     margin-bottom: 20px;
                     font-size: 2.8rem;
+                    margin-top: -30px;
                 }
                 .container-login a {
                     font-size: 0.8rem;
@@ -95,9 +96,7 @@ function LoginForm () {
                     margin-bottom: 50px;
                 }
                 .container-login a:hover { border-bottom: 1px solid transparent; }
-                .message-login {
-                    margin-top: -30px;
-                }
+
                 @media (min-width: 60em) {
                     .container-login .bg-image {
                         margin-top: -130px;
