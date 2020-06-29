@@ -30,7 +30,7 @@ const Contact = () => (
                 top: -65px;
             }                
             .bg-image {
-                height: 100%;
+                height: 103%;
                 left: 50%;
                 margin-left: -600px;
                 position: absolute;
