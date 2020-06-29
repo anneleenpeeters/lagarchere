@@ -16,8 +16,8 @@ import {stateDefinitions } from '../helpers/reserveren'
 function Reserveren({data, jwt}) {
     const today = moment();
     const [kamer, setKamer] = useState();
-    const [aankomstt, setAankomstt] = useState('1-01-2001');
-    const [vertrekk, setVertrekk] = useState('2-01-2001');
+    const [aankomstt, setAankomstt] = useState(null);
+    const [vertrekk, setVertrekk] = useState(null);
     const [value, setValue] = useState(moment.range(today.clone(), today.clone()))
     const [dateRanges, setDateRanges] = useState([])
     const [message, setMessage] = useState();
@@ -62,7 +62,7 @@ function Reserveren({data, jwt}) {
             })
             setDateRanges(dateRanges => dateRanges.sort((a, b) => moment(a.range.start).isBefore(moment(b.range.start)) ? -1 : 1))
         })
-    }, [kamer])
+    }, [onSelect])
 
     //DATUMS
     const onSelect = (value, states) => {
