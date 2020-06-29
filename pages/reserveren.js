@@ -103,7 +103,7 @@ function Reserveren({data, jwt}) {
                                     <div key={k.id} className="container-kamerkeuze">
                                         <label htmlFor={k.naam} className="radio-img">
                                             <input type="radio" id={k.naam} name="kamerkeuze" value={k.id} onClick={gewensteKamer} />
-                                            <img src={`https://wdev.be/wdev_anneleen/eindwerk/images/kamer/${k.thumbnail}`} alt={k.naam} />
+                                            <img src={`${process.env.NEXT_PUBLIC_IMAGE_PATH}${k.thumbnail}`} alt={k.naam} />
                                             <p>Kamer {k.naam}</p>
                                         </label>
                                     </div>
@@ -209,7 +209,7 @@ function Reserveren({data, jwt}) {
 }
 
 export const getServerSideProps = async (ctx) => {
-    const res = await axios.get(`${process.env.API_ENDPOINT}kamers`)
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}kamers`)
     const data = res.data['hydra:member'];
    
     const jwt = getJwt(ctx)

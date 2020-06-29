@@ -71,7 +71,7 @@ const Activiteiten = ({data}) => (
 )
 
 export async function getStaticProps() {
-    const res = await axios.get(`${process.env.API_ENDPOINT}activiteits`)
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}activiteits`)
     const data = res.data['hydra:member'];
     return { props: {data} }
 }

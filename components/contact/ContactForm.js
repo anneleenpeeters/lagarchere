@@ -27,7 +27,7 @@ const ContactForm = () => {
                 }
                 initialValues={initialValues} 
                 onSubmit={(values, formikHelpers)=> {
-                    axios.post(`${process.env.API_ENDPOINT}contacts`, values)
+                    axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}contacts`, values)
                         .then(function (response) {
                             setMessage("Jouw vraag is verzonden!");
                         })

@@ -13,7 +13,7 @@ function Kamer({data}) {
                 <h1 className="heading-style-1">{data.naam}</h1>
                 <div className="masonry">
                     {data.kamerImages.map(i =>
-                        <img src={`${process.env.IMAGE_PATH}${i.image}`} />
+                        <img src={`${process.env.NEXT_PUBLIC_IMAGE_PATH}${i.image}`} />
                     )}
                 </div>
                 <Link href="/reserveren"><a className="button-style-2">Reserveren</a></Link>
@@ -72,7 +72,7 @@ export async function getStaticPaths() {
   }
 
 export const getStaticProps = async ({params}) => {
-    const res = await axios.get(`${process.env.API_ENDPOINT}kamers/${params.id}`);
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}kamers/${params.id}`);
     const data = res.data;
     return { props: {data}};
 };

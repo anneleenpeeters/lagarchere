@@ -25,7 +25,7 @@ const Kamer = ({data}) => (
                                 ))}
                             </div>
                             <div className="kamer-block-two">
-                                <img src={`${process.env.IMAGE_PATH}${k.thumbnail}`} alt={k.naam}/>
+                                <img src={`${process.env.NEXT_PUBLIC_IMAGE_PATH}${k.thumbnail}`} alt={k.naam}/>
                                 <Link as={`/kamers/${k.id}`} href="kamers/[id]"><a>Bekijk alle foto's</a></Link>
                             </div>
                         </div>
@@ -146,7 +146,7 @@ const Kamer = ({data}) => (
 )
 
 export async function getStaticProps() {
-    const res = await axios.get(`${process.env.API_ENDPOINT}kamers`)
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}kamers`)
     const data = res.data['hydra:member'];
     return { props: {data} }
 }

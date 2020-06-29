@@ -31,7 +31,7 @@ function LoginForm () {
                         }
                         initialValues={initialValues} 
                         onSubmit={(values, formikHelpers)=> {
-                            axios.post(`${process.env.API_ENDPOINT}login_check`, values)
+                            axios.post(`${process.env.NEXT_PUBLIC_API_ENDPOINT}login_check`, values)
                                 .then(function (response) {
                                     setMessage("Je bent nu ingelogd");
                                     setCookie(null, "jwtToken", response.data.token, {
