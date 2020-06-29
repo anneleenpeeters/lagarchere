@@ -119,6 +119,7 @@ body {
   border: none;
   border-bottom: 1px solid #1F1F1F;
   font-family: 'Hind', sans-serif;
+  border-radius: none;
 }
 
 /* --------------------------------------------------
