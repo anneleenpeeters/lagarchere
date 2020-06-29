@@ -95,9 +95,12 @@ function LoginForm () {
                     margin-bottom: 50px;
                 }
                 .container-login a:hover { border-bottom: 1px solid transparent; }
+                .message-login {
+                    margin-top: -30px;
+                }
                 @media (min-width: 60em) {
                     .container-login .bg-image {
-                        margin-top: -120px;
+                        margin-top: -130px;
                         height: 100vh;
                     }
                     .container-section { height: 80vh; }
