@@ -62,7 +62,7 @@ function Reserveren({data, jwt}) {
             })
             setDateRanges(dateRanges => dateRanges.sort((a, b) => moment(a.range.start).isBefore(moment(b.range.start)) ? -1 : 1))
         })
-    }, [onSelect])
+    }, [kamer])
 
     //DATUMS
     const onSelect = (value, states) => {
