@@ -8,4 +8,3 @@ module.exports = withImages(withCSS({
         NEXT_PUBLIC_MAP_TOKEN: "pk.eyJ1IjoiYW5uZWxlZW5wZWV0ZXJzIiwiYSI6ImNrYXd5d2QxYjAxNGgyeW5pNTJhaDdoMXEifQ.ls-zfu0zpOvHmm_xWvClfw"
     }
 }))
-    
