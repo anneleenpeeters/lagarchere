@@ -9,7 +9,7 @@ const initialValues = {
 
 const Subscribe = () => {
     const [message, setMessage] = useState('');
-    console.log(`${process.env.NEXT_PUBLIC_IMAGE_PATH}${k.thumbnail}`)
+    console.log(`${process.env.NEXT_PUBLIC_IMAGE_PATH}test.jpg`)
     console.log(`Maptoken:::::${process.env.NEXT_PUBLIC_IMAGE_PATH}`)
     console.log(`${process.env.NEXT_PUBLIC_API_ENDPOINT}activiteits`)
 
