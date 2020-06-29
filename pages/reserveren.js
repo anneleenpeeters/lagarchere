@@ -23,6 +23,8 @@ function Reserveren({data, jwt}) {
     const [message, setMessage] = useState();
     const [user, setUser] = useState()
 
+    console.log(dateRanges);
+
     //USER
     useEffect(() => {
         if (!jwt) { return; }
