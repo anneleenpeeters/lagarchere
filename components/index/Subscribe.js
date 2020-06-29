@@ -12,6 +12,7 @@ const Subscribe = () => {
     console.log(`${process.env.NEXT_PUBLIC_IMAGE_PATH}test.jpg`)
     console.log(`Maptoken:::::${process.env.NEXT_PUBLIC_MAP_TOKEN}`)
     console.log(`${process.env.NEXT_PUBLIC_API_ENDPOINT}activiteits`)
+    
 
     return(
         <div>
