@@ -79,10 +79,10 @@ function LoginForm () {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    justify-content: center;
+                    justify-content: flex-end;
                 }
                 .container-login button{
-                    margin: 40px auto 20px auto;
+                    margin: 40px auto 50px auto;
                     width: 170px;
                 }
                 .container-login h1{
