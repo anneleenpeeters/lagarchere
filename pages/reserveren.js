@@ -32,7 +32,7 @@ function Reserveren({data, jwt}) {
         const base64 = base64Url.replace('-', '+').replace('_', '/');
         const userInfo = JSON.parse(window.atob(base64));
         const userEmail = userInfo.username
-        axios.get(`${process.env.API_ENDPOINT}users?email=${userEmail}`)
+        axios.get(`${process.env.NEXT_PUBLIC_API_ENDPOINT}users?email=${userEmail}`)
         .then(response => {
             setUser('/wdev_anneleen/eindwerk/api/users/' + response.data['hydra:member'][0].id)
         })
